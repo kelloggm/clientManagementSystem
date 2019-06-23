@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <system_user id="1"
+                 first_name="Vasja"
+                 last_name="Pupkin"
+                 system_login="login"
+    />
+
+    <system_user id="1000"
+                 first_name="adminFirstName"
+                 last_name="adminLastName"
+                 system_login="admin"
+    />
+
+    <system_user_role id="1"
+                      system_user_id="1"
+                      system_user_role="ADMIN"
+    />
+
+    <system_user_role id="1000"
+                      system_user_id="1000"
+                      system_user_role="ADMIN"
+    />
+
+</dataset>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <system_user id="1000"
+                 first_name="billManagerFirstName"
+                 last_name="billManagerLastName"
+                 system_login="bill_manager"
+                 system_password="$2a$10$FdTumCzNUsJGQYgY3ZiOweEelhuJshSbeBcjmvsXRRv7H4vtYqOy."
+    />
+
+    <system_user_role id="1000"
+                      system_user_id="1000"
+                      system_user_role="BILL_MANAGER"
+    />
+</dataset>

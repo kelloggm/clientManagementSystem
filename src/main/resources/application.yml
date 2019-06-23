@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: course-management-system
+  datasource:
+    url: jdbc:h2:mem:course-management-system-test:DB_CLOSE_DELAY=-1;REFERENTIAL_INTEGRITY=FALSE;DB_CLOSE_ON_EXIT=TRUE;MODE=MySQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 5
+  jpa:
+    database: H2
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  liquibase:
+    change-log: classpath:db/master.xml
+    enabled: true
+    contexts: master
+
+server:
+  address: 0.0.0.0
+  port: 9210
+
+management:
+  port: 9310
+  security:
+    enabled: false
+
+logging:
+  config: classpath:logback-spring.xml
+  path: logs

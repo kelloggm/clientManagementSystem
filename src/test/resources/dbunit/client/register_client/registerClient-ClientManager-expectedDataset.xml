@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <system_user id="1000"
+                 first_name="clientManagerFirstName"
+                 last_name="clientManagerLastName"
+                 system_login="client_manager_login"
+                 system_password="$2a$10$FdTumCzNUsJGQYgY3ZiOweEelhuJshSbeBcjmvsXRRv7H4vtYqOy."
+    />
+
+    <system_user_role id="1000"
+                      system_user_id="1000"
+                      system_user_role="CLIENT_MANAGER"
+    />
+
+    <client id="1"
+            first_name="Vasja"
+            last_name="Pupkin"
+            phone_number="+371222"
+            email="email@emal.lv"
+            promo_code="promoCode"
+            personal_code="xxxxx"
+            comment="comment"
+            schoolkid="false"
+            student="false"
+            modified_by="client_manager_login"
+    />
+
+</dataset>
