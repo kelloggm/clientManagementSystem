@@ -4,11 +4,14 @@ import lv.javaguru.cms.rest.controllers.client.model.GetClientRequest;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientResponse;
 import lv.javaguru.cms.rest.controllers.client.model.RegisterClientRequest;
 import lv.javaguru.cms.rest.controllers.client.model.RegisterClientResponse;
+import lv.javaguru.cms.rest.controllers.client.model.SearchClientsRequest;
+import lv.javaguru.cms.rest.controllers.client.model.SearchClientsResponse;
 import lv.javaguru.cms.rest.controllers.client.model.UpdateClientRequest;
 import lv.javaguru.cms.rest.controllers.client.model.UpdateClientResponse;
 import lv.javaguru.cms.rest.dto.ClientDTO;
 import lv.javaguru.cms.services.client.GetClientService;
 import lv.javaguru.cms.services.client.RegisterClientService;
+import lv.javaguru.cms.services.client.SearchClientsService;
 import lv.javaguru.cms.services.client.UpdateClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +31,10 @@ public class ClientController {
     @Autowired private RegisterClientService registerClientService;
     @Autowired private GetClientService getClientService;
     @Autowired private UpdateClientService updateClientService;
+    @Autowired private SearchClientsService searchClientsService;
 
     @PostMapping(path = "/client", consumes = "application/json", produces = "application/json")
-    public RegisterClientResponse register(@Valid @RequestBody RegisterClientRequest request,
-                                           Principal principal) {
+    public RegisterClientResponse register(@Valid @RequestBody RegisterClientRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         ClientDTO client = registerClientService.register(request);
         return RegisterClientResponse.builder().clientId(client.getId()).build();
@@ -57,5 +60,10 @@ public class ClientController {
         return UpdateClientResponse.builder().client(client).build();
     }
 
+    @PostMapping(path = "/client/search", consumes = "application/json", produces = "application/json")
+    public SearchClientsResponse search(@Valid @RequestBody SearchClientsRequest request, Principal principal) {
+        request.setSystemUserLogin(principal.getName());
+        return searchClientsService.get(request);
+    }
 
 }
