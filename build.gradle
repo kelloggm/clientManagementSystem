@@ -17,6 +17,7 @@ plugins {
     id 'org.springframework.boot' version '2.0.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.7.RELEASE'
 
+    id "io.freefair.lombok" version "3.7.5"
 }
 
 repositories {
@@ -34,7 +35,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    annotationProcessor 'org.projectlombok:lombok:1.16.18'
     implementation 'org.liquibase:liquibase-core:3.5.5'
     implementation 'com.zaxxer:HikariCP:2.7.9'
     implementation 'com.h2database:h2:1.4.196'
@@ -48,3 +48,5 @@ dependencies {
 
 // Define the main class for the application
 mainClassName = 'lv.javaguru.cmc.App'
+
+apply plugin: "io.freefair.lombok"
