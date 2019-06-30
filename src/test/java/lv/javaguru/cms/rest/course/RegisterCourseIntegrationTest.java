@@ -24,8 +24,8 @@ import static org.junit.Assert.assertThat;
 public class RegisterCourseIntegrationTest extends RestIntegrationTest {
 
     @Test
-    @DatabaseSetup(value = "classpath:dbunit/course/register_course/registerCourse-ClientManager-setupDataset.xml")
-    @ExpectedDatabase(value = "classpath:dbunit/course/register_course/registerCourse-ClientManager-expectedDataset.xml", assertionMode= NON_STRICT)
+    @DatabaseSetup(value = "classpath:dbunit/course/register_course/registerCourse-CourseManager-setupDataset.xml")
+    @ExpectedDatabase(value = "classpath:dbunit/course/register_course/registerCourse-CourseManager-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldRegisterCourseWithClientManagerRole() {
         RegisterCourseRequest request = buildRequest();
