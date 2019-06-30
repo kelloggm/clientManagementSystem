@@ -36,6 +36,9 @@ public abstract class RestIntegrationTest {
     protected static final String CLIENT_MANAGER_LOGIN = "client_manager_login";
     protected static final String CLIENT_MANAGER_PASSWORD = "password";
 
+    protected static final String COURSE_MANAGER_LOGIN = "course_manager_login";
+    protected static final String COURSE_MANAGER_PASSWORD = "password";
+
     protected static final String BILL_MANAGER_LOGIN = "bill_manager";
     protected static final String BILL_MANAGER_PASSWORD = "password";
 

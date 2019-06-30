@@ -2,6 +2,7 @@ package lv.javaguru.cms.model.entities;
 
 public enum Tables {
 
+    COURSE("course"),
     CLIENT("client"),
     SYSTEM_USER_ROLE("system_user_role"),
     SYSTEM_USER("system_user");
