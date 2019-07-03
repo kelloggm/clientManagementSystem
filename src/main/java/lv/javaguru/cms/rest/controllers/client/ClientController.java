@@ -49,9 +49,9 @@ public class ClientController {
     }
 
     @PutMapping(path = "/client/{clientId}", consumes = "application/json", produces = "application/json")
-    public UpdateClientResponse get(@PathVariable("clientId") Long clientId,
-                                    @Valid @RequestBody UpdateClientRequest request,
-                                    Principal principal) {
+    public UpdateClientResponse update(@PathVariable("clientId") Long clientId,
+                                       @Valid @RequestBody UpdateClientRequest request,
+                                       Principal principal) {
         if (!Objects.equals(clientId, request.getClientId())) {
             throw new IllegalArgumentException("clientId");
         }
