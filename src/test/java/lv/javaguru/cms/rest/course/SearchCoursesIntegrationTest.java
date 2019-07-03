@@ -78,6 +78,21 @@ public class SearchCoursesIntegrationTest extends RestIntegrationTest {
     @DatabaseSetup(value = "classpath:dbunit/course/search_course/searchCourse-Admin-setupDataset.xml")
     @ExpectedDatabase(value = "classpath:dbunit/course/search_course/searchCourse-Admin-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
+    public void shouldSearchCoursesByFullPrice() {
+        SearchCoursesRequest request = SearchCoursesRequest.builder()
+                .searchConditions(Lists.newArrayList(new SearchCondition("fullPrice", SearchOperation.EQUAL, 777)))
+                .build();
+        SearchCoursesResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
+        assertThat(response.isOk(), is(true));
+        assertThat(response.getErrors(), is(nullValue()));
+        assertThat(response.getCourses().size(), is(1));
+        assertThat(response.getCourses().get(0).getId(), is(2L));
+    }
+
+    @Test
+    @DatabaseSetup(value = "classpath:dbunit/course/search_course/searchCourse-Admin-setupDataset.xml")
+    @ExpectedDatabase(value = "classpath:dbunit/course/search_course/searchCourse-Admin-setupDataset.xml", assertionMode= NON_STRICT)
+    @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldSearchCoursesByTitle() {
         SearchCoursesRequest request = SearchCoursesRequest.builder()
                 .searchConditions(Lists.newArrayList(new SearchCondition("title", SearchOperation.EQUAL, "QA 1")))
