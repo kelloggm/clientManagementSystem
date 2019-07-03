@@ -1,13 +1,13 @@
-package lv.javaguru.cms.services.client;
+package lv.javaguru.cms.services.course;
 
-import lv.javaguru.cms.model.entities.ClientEntity;
+import lv.javaguru.cms.model.entities.CourseEntity;
 import lv.javaguru.cms.model.entities.SystemUserRole;
-import lv.javaguru.cms.model.entities.search.ClientSpecification;
-import lv.javaguru.cms.model.repositories.ClientRepository;
-import lv.javaguru.cms.rest.controllers.client.model.SearchClientsRequest;
-import lv.javaguru.cms.rest.controllers.client.model.SearchClientsResponse;
+import lv.javaguru.cms.model.entities.search.CourseSpecification;
+import lv.javaguru.cms.model.repositories.CourseRepository;
+import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesRequest;
+import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesResponse;
 import lv.javaguru.cms.rest.controllers.search.SearchCondition;
-import lv.javaguru.cms.rest.dto.ClientDTO;
+import lv.javaguru.cms.rest.dto.CourseDTO;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,29 +21,31 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class SearchClientsService {
+public class SearchCoursesService {
 
     @Autowired private SystemUserRightsChecker rightsChecker;
-    @Autowired private ClientRepository clientRepository;
-    @Autowired private ClientEntityToDTOConverter clientEntityToDTOConverter;
+    @Autowired private CourseRepository courseRepository;
+    @Autowired private CourseEntityToDTOConverter courseEntityToDTOConverter;
 
-    public SearchClientsResponse search(SearchClientsRequest request) {
-        rightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.CLIENT_MANAGER);
+    public SearchCoursesResponse search(SearchCoursesRequest request) {
+        rightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.COURSE_MANAGER);
 
         Optional<Specification> specification = buildSpecification(request.getSearchConditions());
         Sort sort = buildSort(request);
         PageRequest pageRequest = buildPageRequest(request, sort);
 
-        Page<ClientEntity> page = specification.isPresent() ? clientRepository.findAll(specification.get(), pageRequest) : clientRepository.findAll(pageRequest);
+        Page<CourseEntity> page = specification.isPresent()
+                ? courseRepository.findAll(specification.get(), pageRequest)
+                : courseRepository.findAll(pageRequest);
 
-        return SearchClientsResponse.builder()
+        return SearchCoursesResponse.builder()
                                     .totalElements(page.getTotalElements())
                                     .totalPages(page.getTotalPages())
-                                    .clients(convert(page.getContent()))
+                                    .courses(convert(page.getContent()))
                                     .build();
     }
 
-    private PageRequest buildPageRequest(SearchClientsRequest request, Sort sort) {
+    private PageRequest buildPageRequest(SearchCoursesRequest request, Sort sort) {
         if (request.getPageNumber() == null || request.getPageSize() == null) {
             return PageRequest.of(0, 20, sort);
         } else {
@@ -51,7 +53,7 @@ public class SearchClientsService {
         }
     }
 
-    private Sort buildSort(SearchClientsRequest request) {
+    private Sort buildSort(SearchCoursesRequest request) {
         if (request.getOrderBy() == null || request.getOrderDirection() == null) {
             return Sort.by(Sort.Direction.ASC, "id");
         } else {
@@ -66,9 +68,14 @@ public class SearchClientsService {
         if (searchConditions == null || searchConditions.isEmpty()) {
             return Optional.empty();
         } else {
-            List<ClientSpecification> specs = searchConditions.stream()
-                    .map(searchCondition -> new ClientSpecification(
-                            new SearchCondition(searchCondition.getField(), searchCondition.getOperation(), searchCondition.getValue())))
+            List<CourseSpecification> specs = searchConditions.stream()
+                    .map(searchCondition -> new CourseSpecification(
+                            new SearchCondition(
+                                    searchCondition.getField(),
+                                    searchCondition.getOperation(),
+                                    searchCondition.getValue()
+                            ))
+                    )
                     .collect(Collectors.toList());
 
             Specification spec = Specification.where(specs.get(0));
@@ -80,9 +87,9 @@ public class SearchClientsService {
 
     }
 
-    private List<ClientDTO> convert(List<ClientEntity> clients) {
+    private List<CourseDTO> convert(List<CourseEntity> clients) {
         return clients.stream()
-                      .map(client -> clientEntityToDTOConverter.convert(client))
+                      .map(client -> courseEntityToDTOConverter.convert(client))
                       .collect(Collectors.toList());
     }
 

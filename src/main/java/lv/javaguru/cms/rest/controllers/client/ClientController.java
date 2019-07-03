@@ -63,7 +63,7 @@ public class ClientController {
     @PostMapping(path = "/client/search", consumes = "application/json", produces = "application/json")
     public SearchClientsResponse search(@Valid @RequestBody SearchClientsRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
-        return searchClientsService.get(request);
+        return searchClientsService.search(request);
     }
 
 }

@@ -4,11 +4,14 @@ import lv.javaguru.cms.rest.controllers.course.model.GetCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.GetCourseResponse;
 import lv.javaguru.cms.rest.controllers.course.model.RegisterCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.RegisterCourseResponse;
+import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesRequest;
+import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesResponse;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseResponse;
 import lv.javaguru.cms.rest.dto.CourseDTO;
 import lv.javaguru.cms.services.course.GetCourseService;
 import lv.javaguru.cms.services.course.RegisterCourseService;
+import lv.javaguru.cms.services.course.SearchCoursesService;
 import lv.javaguru.cms.services.course.UpdateCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +31,7 @@ public class CourseController {
     @Autowired private RegisterCourseService registerCourseService;
     @Autowired private GetCourseService getCourseService;
     @Autowired private UpdateCourseService updateCourseService;
+    @Autowired private SearchCoursesService searchCoursesService;
 
     @PostMapping(path = "/course", consumes = "application/json", produces = "application/json")
     public RegisterCourseResponse register(@Valid @RequestBody RegisterCourseRequest request, Principal principal) {
@@ -54,6 +58,12 @@ public class CourseController {
         request.setSystemUserLogin(principal.getName());
         CourseDTO course = updateCourseService.update(request);
         return UpdateCourseResponse.builder().course(course).build();
+    }
+
+    @PostMapping(path = "/course/search", consumes = "application/json", produces = "application/json")
+    public SearchCoursesResponse search(@Valid @RequestBody SearchCoursesRequest request, Principal principal) {
+        request.setSystemUserLogin(principal.getName());
+        return searchCoursesService.search(request);
     }
 
 }

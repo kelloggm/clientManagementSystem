@@ -5,7 +5,7 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import lv.javaguru.cms.model.entities.ClientEntity;
 import lv.javaguru.cms.rest.controllers.search.SearchOperation;
-import lv.javaguru.cms.model.entities.search.client.ClientSpecification;
+import lv.javaguru.cms.model.entities.search.ClientSpecification;
 import lv.javaguru.cms.rest.controllers.search.SearchCondition;
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
 import org.junit.Test;
