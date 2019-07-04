@@ -198,4 +198,63 @@
 
     </changeSet>
 
+    <changeSet author="viktors.savonins" id="create.table.course_registration">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="course_registration"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="course_registration">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_course_registration"/>
+            </column>
+            <column name="course_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column defaultValueNumeric="0" name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="modified_by" type="varchar(100)"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="course_registration"
+                                 constraintName="fk_course_registration_course_id"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
+        <addForeignKeyConstraint baseColumnNames="client_id"
+                                 baseTableName="course_registration"
+                                 constraintName="fk_course_registration_client_id"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="client"/>
+
+        <createIndex indexName="in_course_registration_course_id"
+                     tableName="course_registration" unique="false">
+            <column name="course_id"/>
+        </createIndex>
+
+        <createIndex indexName="in_course_registration_client_id"
+                     tableName="course_registration" unique="false">
+            <column name="client_id"/>
+        </createIndex>
+    </changeSet>
+
 </databaseChangeLog>
