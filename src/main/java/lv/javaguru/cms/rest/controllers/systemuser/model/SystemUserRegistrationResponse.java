@@ -1,4 +1,4 @@
-package lv.javaguru.cms.rest.controllers.client.model;
+package lv.javaguru.cms.rest.controllers.systemuser.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,8 +14,8 @@ import lv.javaguru.cms.rest.BaseResponse;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class RegisterClientResponse extends BaseResponse {
+public class SystemUserRegistrationResponse extends BaseResponse {
 
-    private Long clientId;
+    private Long systemUserId;
 
 }

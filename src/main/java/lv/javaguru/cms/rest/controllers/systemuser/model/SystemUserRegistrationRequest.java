@@ -1,4 +1,4 @@
-package lv.javaguru.cms.rest.controllers.client.model;
+package lv.javaguru.cms.rest.controllers.systemuser.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lv.javaguru.cms.model.entities.SystemUserRole;
 import lv.javaguru.cms.rest.BaseRequest;
 
 import javax.validation.constraints.NotNull;
@@ -16,25 +17,21 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class RegisterClientRequest extends BaseRequest {
+public class SystemUserRegistrationRequest extends BaseRequest {
 
     @NotNull
     private String firstName;
 
+    @NotNull
     private String lastName;
 
-    private String phoneNumber;
+    @NotNull
+    private String login;
 
-    private String email;
+    @NotNull
+    private String password;
 
-    private String promoCode;
-
-    private String personalCode;
-
-    private String comment;
-
-    private Boolean schoolkid;
-
-    private Boolean student;
+    @NotNull
+    private SystemUserRole systemUserRole;
 
 }

@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class RegisterCourseRequest extends BaseRequest {
+public class CourseRegistrationRequest extends BaseRequest {
 
     @NotNull
     private String title;

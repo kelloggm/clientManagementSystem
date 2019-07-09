@@ -3,7 +3,7 @@ package lv.javaguru.cms.services.course;
 import lv.javaguru.cms.model.entities.CourseEntity;
 import lv.javaguru.cms.model.entities.SystemUserRole;
 import lv.javaguru.cms.model.repositories.CourseRepository;
-import lv.javaguru.cms.rest.controllers.course.model.RegisterCourseRequest;
+import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationRequest;
 import lv.javaguru.cms.rest.dto.CourseDTO;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class RegisterCourseService {
     @Autowired private CourseEntityToDTOConverter courseEntityToDTOConverter;
 
     @Transactional
-    public CourseDTO register(RegisterCourseRequest request) {
+    public CourseDTO register(CourseRegistrationRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.COURSE_MANAGER);
         checkIfCourseAlreadyExist(request);
         CourseEntity course = buildCourseEntity(request);
@@ -29,7 +29,7 @@ public class RegisterCourseService {
         return courseEntityToDTOConverter.convert(course);
     }
 
-    private CourseEntity buildCourseEntity(RegisterCourseRequest request) {
+    private CourseEntity buildCourseEntity(CourseRegistrationRequest request) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         CourseEntity course = CourseEntity.builder()
                                           .title(request.getTitle())
@@ -47,7 +47,7 @@ public class RegisterCourseService {
         return course;
     }
 
-    private void checkIfCourseAlreadyExist(RegisterCourseRequest request) {
+    private void checkIfCourseAlreadyExist(CourseRegistrationRequest request) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
         courseRepository.findByTitleAndLanguageAndAddressAndCourseTypeAndStartDateAndEndDate(

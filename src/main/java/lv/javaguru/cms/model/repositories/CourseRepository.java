@@ -23,5 +23,4 @@ public interface CourseRepository
             @Param("endDate") LocalDate endDate
     );
 
-
 }

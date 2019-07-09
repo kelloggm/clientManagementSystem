@@ -3,7 +3,7 @@ package lv.javaguru.cms.services.client;
 import lv.javaguru.cms.model.entities.ClientEntity;
 import lv.javaguru.cms.model.entities.SystemUserRole;
 import lv.javaguru.cms.model.repositories.ClientRepository;
-import lv.javaguru.cms.rest.controllers.client.model.RegisterClientRequest;
+import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationRequest;
 import lv.javaguru.cms.rest.dto.ClientDTO;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 @Component
-public class RegisterClientService {
+public class ClientRegistrationService {
 
     @Autowired private SystemUserRightsChecker systemUserRightsChecker;
     @Autowired private ClientRepository clientRepository;
     @Autowired private ClientEntityToDTOConverter clientEntityToDTOConverter;
 
     @Transactional
-    public ClientDTO register(RegisterClientRequest request) {
+    public ClientDTO register(ClientRegistrationRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.CLIENT_MANAGER);
         checkIfClientHavePhoneOrEmail(request);
         checkIfClientAlreadyExist(request);
@@ -28,7 +28,7 @@ public class RegisterClientService {
         return clientEntityToDTOConverter.convert(client);
     }
 
-    private ClientEntity buildClientEntity(RegisterClientRequest request) {
+    private ClientEntity buildClientEntity(ClientRegistrationRequest request) {
         ClientEntity client = ClientEntity.builder()
                                           .firstName(request.getFirstName())
                                           .lastName(request.getLastName())
@@ -44,14 +44,14 @@ public class RegisterClientService {
         return client;
     }
 
-    private void checkIfClientHavePhoneOrEmail(RegisterClientRequest request) {
+    private void checkIfClientHavePhoneOrEmail(ClientRegistrationRequest request) {
         if (StringUtils.isEmpty(request.getPhoneNumber())
             && StringUtils.isEmpty(request.getEmail())) {
             throw new IllegalArgumentException("Phone or email must be present");
         }
     }
 
-    private void checkIfClientAlreadyExist(RegisterClientRequest request) {
+    private void checkIfClientAlreadyExist(ClientRegistrationRequest request) {
         clientRepository.findByFirstNameAndLastNameAndPhoneNumberAndEmail(
                 request.getFirstName(), request.getLastName(), request.getPhoneNumber(), request.getEmail()
         ).ifPresent(clientEntity -> {
