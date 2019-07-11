@@ -1,4 +1,4 @@
-package lv.javaguru.cms.rest.controllers.course.model;
+package lv.javaguru.cms.rest.controllers.registration.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,8 +14,8 @@ import lv.javaguru.cms.rest.BaseResponse;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ClientToCourseRegistrationResponse extends BaseResponse {
+public class RegistrationResponse extends BaseResponse {
 
-    private Long courseRegistrationId;
+    private Long registrationId;
 
 }

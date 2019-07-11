@@ -1,17 +1,14 @@
 package lv.javaguru.cms.rest.controllers.course;
 
-import lv.javaguru.cms.rest.controllers.course.model.ClientToCourseRegistrationRequest;
-import lv.javaguru.cms.rest.controllers.course.model.ClientToCourseRegistrationResponse;
 import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationRequest;
+import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationResponse;
 import lv.javaguru.cms.rest.controllers.course.model.GetCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.GetCourseResponse;
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationResponse;
 import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesRequest;
 import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesResponse;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseResponse;
 import lv.javaguru.cms.rest.dto.CourseDTO;
-import lv.javaguru.cms.services.course.ClientToCourseRegistrationService;
 import lv.javaguru.cms.services.course.GetCourseService;
 import lv.javaguru.cms.services.course.RegisterCourseService;
 import lv.javaguru.cms.services.course.SearchCoursesService;
@@ -35,7 +32,6 @@ public class CourseController {
     @Autowired private GetCourseService getCourseService;
     @Autowired private UpdateCourseService updateCourseService;
     @Autowired private SearchCoursesService searchCoursesService;
-    @Autowired private ClientToCourseRegistrationService courseRegistrationService;
 
     @PostMapping(path = "/course", consumes = "application/json", produces = "application/json")
     public CourseRegistrationResponse register(@Valid @RequestBody CourseRegistrationRequest request, Principal principal) {
@@ -68,18 +64,6 @@ public class CourseController {
     public SearchCoursesResponse search(@Valid @RequestBody SearchCoursesRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         return searchCoursesService.search(request);
-    }
-
-    @PostMapping(path = "/course/{courseId}/client/{clientId}", produces = "application/json")
-    public ClientToCourseRegistrationResponse registerClient(@PathVariable("courseId") Long courseId,
-                                                             @PathVariable("clientId") Long clientId,
-                                                             Principal principal) {
-        ClientToCourseRegistrationRequest request = ClientToCourseRegistrationRequest.builder()
-                .courseId(courseId)
-                .clientId(clientId)
-                .build();
-        request.setSystemUserLogin(principal.getName());
-        return courseRegistrationService.register(request);
     }
 
 }

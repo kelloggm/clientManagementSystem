@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <system_user id="1000"
+                 first_name="adminFirstName"
+                 last_name="adminLastName"
+                 system_login="admin"
+                 system_password="$2a$10$FdTumCzNUsJGQYgY3ZiOweEelhuJshSbeBcjmvsXRRv7H4vtYqOy."
+    />
+
+    <system_user_role id="1000"
+                      system_user_id="1000"
+                      system_user_role="ADMIN"
+    />
+
+    <course id="1"
+            title = "Java 1 - Introduction to Java"
+            language = "RU"
+            start_date = "2019-10-01"
+            end_date = "2020-10-01"
+            course_type = "IN_CLASS"
+            address = "Skolas 21, cabinet 508c"
+            lessons_time_from = "18:00"
+            lessons_time_to = "21:00"
+            day_of_the_week = "MONDAY"
+            full_price = "400"
+            modified_by="admin"
+    />
+
+    <client id="1"
+            first_name="Vasja"
+            last_name="Pupkin"
+            phone_number="+371222"
+            email="email@emal.lv"
+            promo_code="promoCode"
+            personal_code="xxxxx"
+            comment="comment"
+            schoolkid="false"
+            student="false"
+            modified_by="admin"
+    />
+
+</dataset>
