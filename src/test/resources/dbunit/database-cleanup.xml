@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <registration/>
+    <course_registration/>
     <course/>
     <client/>
     <system_user_role/>

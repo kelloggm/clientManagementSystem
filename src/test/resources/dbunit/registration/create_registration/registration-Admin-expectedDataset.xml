@@ -39,10 +39,10 @@
             modified_by="admin"
     />
 
-    <registration id="1"
-                  course_id="1"
-                  client_id="1"
-                  modified_by="admin"
+    <course_registration id="1"
+                         course_id="1"
+                         client_id="1"
+                         modified_by="admin"
     />
 
 </dataset>

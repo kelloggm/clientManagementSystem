@@ -3,7 +3,7 @@ package lv.javaguru.cms.services.course;
 import lv.javaguru.cms.model.entities.CourseEntity;
 import lv.javaguru.cms.model.entities.SystemUserRole;
 import lv.javaguru.cms.model.repositories.CourseRepository;
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationRequest;
+import lv.javaguru.cms.rest.controllers.course.model.CreateCourseRequest;
 import lv.javaguru.cms.rest.dto.CourseDTO;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +14,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class RegisterCourseService {
+public class CreateCourseService {
 
     @Autowired private SystemUserRightsChecker systemUserRightsChecker;
     @Autowired private CourseRepository courseRepository;
     @Autowired private CourseEntityToDTOConverter courseEntityToDTOConverter;
 
     @Transactional
-    public CourseDTO register(CourseRegistrationRequest request) {
+    public CourseDTO create(CreateCourseRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.COURSE_MANAGER);
         checkIfCourseAlreadyExist(request);
         CourseEntity course = buildCourseEntity(request);
@@ -29,7 +29,7 @@ public class RegisterCourseService {
         return courseEntityToDTOConverter.convert(course);
     }
 
-    private CourseEntity buildCourseEntity(CourseRegistrationRequest request) {
+    private CourseEntity buildCourseEntity(CreateCourseRequest request) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         CourseEntity course = CourseEntity.builder()
                                           .title(request.getTitle())
@@ -47,7 +47,7 @@ public class RegisterCourseService {
         return course;
     }
 
-    private void checkIfCourseAlreadyExist(CourseRegistrationRequest request) {
+    private void checkIfCourseAlreadyExist(CreateCourseRequest request) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
         courseRepository.findByTitleAndLanguageAndAddressAndCourseTypeAndStartDateAndEndDate(

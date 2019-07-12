@@ -1,4 +1,4 @@
-package lv.javaguru.cms.rest.controllers.registration.model;
+package lv.javaguru.cms.rest.controllers.course.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lv.javaguru.cms.rest.BaseRequest;
-
-import javax.validation.constraints.NotNull;
+import lv.javaguru.cms.rest.BaseResponse;
 
 @Data
 @Builder
@@ -16,12 +14,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class RegistrationRequest extends BaseRequest {
+public class CreateCourseResponse extends BaseResponse {
 
-    @NotNull
     private Long courseId;
-
-    @NotNull
-    private Long clientId;
 
 }

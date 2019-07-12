@@ -1,4 +1,4 @@
-package lv.javaguru.cms.rest.controllers.registration.model;
+package lv.javaguru.cms.rest.controllers.course.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lv.javaguru.cms.rest.BaseResponse;
+import lv.javaguru.cms.rest.dto.CourseRegistrationDTO;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -14,8 +17,8 @@ import lv.javaguru.cms.rest.BaseResponse;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class RegistrationResponse extends BaseResponse {
+public class GetCourseRegistrationsResponse extends BaseResponse {
 
-    private Long registrationId;
+    private List<CourseRegistrationDTO> registrations;
 
 }

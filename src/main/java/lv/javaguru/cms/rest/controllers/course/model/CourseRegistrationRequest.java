@@ -6,9 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lv.javaguru.cms.model.entities.CourseType;
-import lv.javaguru.cms.model.entities.DayOfTheWeek;
-import lv.javaguru.cms.model.entities.Language;
 import lv.javaguru.cms.rest.BaseRequest;
 
 import javax.validation.constraints.NotNull;
@@ -22,33 +19,9 @@ import javax.validation.constraints.NotNull;
 public class CourseRegistrationRequest extends BaseRequest {
 
     @NotNull
-    private String title;
+    private Long courseId;
 
     @NotNull
-    private Language language;
-
-    @NotNull
-    private String startDate;
-
-    @NotNull
-    private String endDate;
-
-    @NotNull
-    private CourseType courseType;
-
-    @NotNull
-    private String address;
-
-    @NotNull
-    private String lessonsTimeFrom;
-
-    @NotNull
-    private String lessonsTimeTo;
-
-    @NotNull
-    private DayOfTheWeek dayOfTheWeek;
-
-    @NotNull
-    private Integer fullPrice;
+    private Long clientId;
 
 }

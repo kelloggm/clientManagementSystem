@@ -13,14 +13,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "registration")
+@Table(name = "course_registration")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class RegistrationEntity extends BaseEntity {
+public class CourseRegistrationEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "course_id")

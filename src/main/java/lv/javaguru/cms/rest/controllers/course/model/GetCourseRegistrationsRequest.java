@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lv.javaguru.cms.rest.BaseResponse;
+import lv.javaguru.cms.rest.BaseRequest;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -14,8 +16,9 @@ import lv.javaguru.cms.rest.BaseResponse;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class CourseRegistrationResponse extends BaseResponse {
+public class GetCourseRegistrationsRequest extends BaseRequest {
 
-    private Long registrationId;
+    @NotNull
+    private Long courseId;
 
 }

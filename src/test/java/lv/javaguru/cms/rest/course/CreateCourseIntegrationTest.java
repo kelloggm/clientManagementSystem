@@ -8,8 +8,8 @@ import lv.javaguru.cms.model.entities.DayOfTheWeek;
 import lv.javaguru.cms.model.entities.Language;
 import lv.javaguru.cms.rest.CmsErrorCategory;
 import lv.javaguru.cms.rest.CmsErrorCode;
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationRequest;
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationResponse;
+import lv.javaguru.cms.rest.controllers.course.model.CreateCourseRequest;
+import lv.javaguru.cms.rest.controllers.course.model.CreateCourseResponse;
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -21,15 +21,15 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-public class CourseRegistrationIntegrationTest extends RestIntegrationTest {
+public class CreateCourseIntegrationTest extends RestIntegrationTest {
 
     @Test
     @DatabaseSetup(value = "classpath:dbunit/course/register_course/registerCourse-CourseManager-setupDataset.xml")
     @ExpectedDatabase(value = "classpath:dbunit/course/register_course/registerCourse-CourseManager-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldRegisterCourseWithClientManagerRole() {
-        CourseRegistrationRequest request = buildRequest();
-        CourseRegistrationResponse response = sendRequest(COURSE_MANAGER_LOGIN, COURSE_MANAGER_PASSWORD, request);
+        CreateCourseRequest request = buildRequest();
+        CreateCourseResponse response = sendRequest(COURSE_MANAGER_LOGIN, COURSE_MANAGER_PASSWORD, request);
         assertThat(response.isOk(), is(true));
         assertThat(response.getErrors(), is(nullValue()));
         assertThat(response.getCourseId(), is(notNullValue()));
@@ -40,8 +40,8 @@ public class CourseRegistrationIntegrationTest extends RestIntegrationTest {
     @ExpectedDatabase(value = "classpath:dbunit/course/register_course/registerCourse-Admin-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldRegisterCourseWithAdminRole() {
-        CourseRegistrationRequest request = buildRequest();
-        CourseRegistrationResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
+        CreateCourseRequest request = buildRequest();
+        CreateCourseResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(true));
         assertThat(response.getErrors(), is(nullValue()));
         assertThat(response.getCourseId(), is(notNullValue()));
@@ -52,8 +52,8 @@ public class CourseRegistrationIntegrationTest extends RestIntegrationTest {
     @ExpectedDatabase(value = "classpath:dbunit/course/register_course/registerCourse-illegalAccessRights-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnSecurityErrorWhenUserNotHaveAccessRights() {
-        CourseRegistrationRequest request = buildRequest();
-        CourseRegistrationResponse response = sendRequest(BILL_MANAGER_LOGIN, BILL_MANAGER_PASSWORD, request);
+        CreateCourseRequest request = buildRequest();
+        CreateCourseResponse response = sendRequest(BILL_MANAGER_LOGIN, BILL_MANAGER_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), is(CmsErrorCategory.WORKFLOW));
@@ -66,9 +66,9 @@ public class CourseRegistrationIntegrationTest extends RestIntegrationTest {
     @ExpectedDatabase(value = "classpath:dbunit/course/register_course/registerCourse-Admin-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnValidationErrorWhenTitleIsNull() {
-        CourseRegistrationRequest request = buildRequest();
+        CreateCourseRequest request = buildRequest();
         request.setTitle(null);
-        CourseRegistrationResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
+        CreateCourseResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), Matchers.is(CmsErrorCategory.VALIDATION));
@@ -81,8 +81,8 @@ public class CourseRegistrationIntegrationTest extends RestIntegrationTest {
     @ExpectedDatabase(value = "classpath:dbunit/course/register_course/registerCourse-CourseAlreadyExist-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnValidationErrorWhenClientAlreadyExist() {
-        CourseRegistrationRequest request = buildRequest();
-        CourseRegistrationResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
+        CreateCourseRequest request = buildRequest();
+        CreateCourseResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), is(CmsErrorCategory.VALIDATION));
@@ -90,8 +90,8 @@ public class CourseRegistrationIntegrationTest extends RestIntegrationTest {
         assertThat(response.getErrors().get(0).getDescription(), is("Course already exist"));
     }
 
-    private CourseRegistrationRequest buildRequest() {
-        return CourseRegistrationRequest.builder()
+    private CreateCourseRequest buildRequest() {
+        return CreateCourseRequest.builder()
                 .title("Java 1 - Introduction to Java")
                 .language(Language.RU)
                 .startDate("01.10.2019")
@@ -105,11 +105,11 @@ public class CourseRegistrationIntegrationTest extends RestIntegrationTest {
                 .build();
     }
 
-    private CourseRegistrationResponse sendRequest(String userName,
-                                                   String password,
-                                                   CourseRegistrationRequest request) {
+    private CreateCourseResponse sendRequest(String userName,
+                                             String password,
+                                             CreateCourseRequest request) {
         return getRestTemplate(userName, password).postForObject(
-                baseUrl() + "/course", request, CourseRegistrationResponse.class);
+                baseUrl() + "/course", request, CreateCourseResponse.class);
     }
 
 }
