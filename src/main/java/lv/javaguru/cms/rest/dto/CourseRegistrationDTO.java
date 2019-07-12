@@ -19,4 +19,6 @@ public class CourseRegistrationDTO extends BaseDTO {
 
     private ClientDTO client;
 
+    private String status;
+
 }

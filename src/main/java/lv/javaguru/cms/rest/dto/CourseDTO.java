@@ -6,9 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lv.javaguru.cms.model.entities.CourseType;
-import lv.javaguru.cms.model.entities.DayOfTheWeek;
-import lv.javaguru.cms.model.entities.Language;
+import lv.javaguru.cms.model.entities.enums.CourseType;
+import lv.javaguru.cms.model.entities.enums.DayOfTheWeek;
+import lv.javaguru.cms.model.entities.enums.Language;
 
 @Data
 @Builder

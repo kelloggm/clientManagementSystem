@@ -1,6 +1,6 @@
 package lv.javaguru.cms.services.systemuser;
 
-import lv.javaguru.cms.model.entities.SystemUserRole;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.SystemUserRepository;
 import lv.javaguru.cms.rest.controllers.systemuser.model.GetSystemUserRequest;
 import lv.javaguru.cms.rest.dto.SystemUserDTO;

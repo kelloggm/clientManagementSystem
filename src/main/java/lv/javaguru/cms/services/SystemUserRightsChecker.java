@@ -1,6 +1,6 @@
 package lv.javaguru.cms.services;
 
-import lv.javaguru.cms.model.entities.SystemUserRole;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.SystemUserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

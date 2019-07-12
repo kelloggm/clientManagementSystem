@@ -3,7 +3,8 @@ package lv.javaguru.cms.services.course;
 import lv.javaguru.cms.model.entities.ClientEntity;
 import lv.javaguru.cms.model.entities.CourseEntity;
 import lv.javaguru.cms.model.entities.CourseRegistrationEntity;
-import lv.javaguru.cms.model.entities.SystemUserRole;
+import lv.javaguru.cms.model.entities.enums.CourseRegistrationStatus;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.ClientRepository;
 import lv.javaguru.cms.model.repositories.CourseRegistrationRepository;
 import lv.javaguru.cms.model.repositories.CourseRepository;
@@ -31,6 +32,7 @@ public class CourseRegistrationFactory {
         CourseRegistrationEntity registration = CourseRegistrationEntity.builder()
                 .course(course)
                 .client(client)
+                .status(CourseRegistrationStatus.ACTIVE)
                 .build();
         registration.setModifiedBy(request.getSystemUserLogin());
         registration = courseRegistrationRepository.save(registration);

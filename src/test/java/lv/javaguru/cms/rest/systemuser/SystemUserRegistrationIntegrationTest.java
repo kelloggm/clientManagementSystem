@@ -8,7 +8,7 @@ import lv.javaguru.cms.rest.CmsErrorCode;
 import lv.javaguru.cms.rest.controllers.systemuser.model.SystemUserRegistrationRequest;
 import lv.javaguru.cms.rest.controllers.systemuser.model.SystemUserRegistrationResponse;
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
-import lv.javaguru.cms.model.entities.SystemUserRole;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 

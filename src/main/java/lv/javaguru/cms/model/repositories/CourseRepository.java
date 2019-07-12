@@ -1,8 +1,8 @@
 package lv.javaguru.cms.model.repositories;
 
 import lv.javaguru.cms.model.entities.CourseEntity;
-import lv.javaguru.cms.model.entities.CourseType;
-import lv.javaguru.cms.model.entities.Language;
+import lv.javaguru.cms.model.entities.enums.CourseType;
+import lv.javaguru.cms.model.entities.enums.Language;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.query.Param;

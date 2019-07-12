@@ -1,4 +1,4 @@
-package lv.javaguru.cms.model.entities;
+package lv.javaguru.cms.model.entities.enums;
 
 public enum CourseType {
 

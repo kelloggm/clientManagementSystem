@@ -1,7 +1,7 @@
 package lv.javaguru.cms.model.repositories;
 
 import lv.javaguru.cms.model.entities.SystemUserEntity;
-import lv.javaguru.cms.model.entities.SystemUserRole;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.entities.SystemUserRoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

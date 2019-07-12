@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

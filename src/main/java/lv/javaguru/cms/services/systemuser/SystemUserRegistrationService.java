@@ -1,7 +1,7 @@
 package lv.javaguru.cms.services.systemuser;
 
 import lv.javaguru.cms.model.entities.SystemUserEntity;
-import lv.javaguru.cms.model.entities.SystemUserRole;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.entities.SystemUserRoleEntity;
 import lv.javaguru.cms.model.repositories.SystemUserRepository;
 import lv.javaguru.cms.model.repositories.SystemUserRoleRepository;

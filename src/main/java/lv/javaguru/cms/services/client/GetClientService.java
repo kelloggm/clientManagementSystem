@@ -1,6 +1,6 @@
 package lv.javaguru.cms.services.client;
 
-import lv.javaguru.cms.model.entities.SystemUserRole;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.ClientRepository;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientRequest;
 import lv.javaguru.cms.rest.dto.ClientDTO;

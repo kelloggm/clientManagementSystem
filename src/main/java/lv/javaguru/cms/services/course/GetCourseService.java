@@ -1,6 +1,6 @@
 package lv.javaguru.cms.services.course;
 
-import lv.javaguru.cms.model.entities.SystemUserRole;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.CourseRepository;
 import lv.javaguru.cms.rest.controllers.course.model.GetCourseRequest;
 import lv.javaguru.cms.rest.dto.CourseDTO;

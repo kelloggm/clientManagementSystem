@@ -1,7 +1,7 @@
 package lv.javaguru.cms.services;
 
 import com.google.common.collect.Lists;
-import lv.javaguru.cms.model.entities.SystemUserRole;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.SystemUserRoleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;

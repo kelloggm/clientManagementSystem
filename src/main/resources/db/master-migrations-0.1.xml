@@ -215,6 +215,9 @@
             <column name="client_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
+            <column name="status" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
 
             <column defaultValueNumeric="0" name="version" type="BIGINT">
                 <constraints nullable="false"/>
