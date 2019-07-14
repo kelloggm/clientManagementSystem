@@ -5,8 +5,8 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import lv.javaguru.cms.rest.CmsErrorCategory;
 import lv.javaguru.cms.rest.CmsErrorCode;
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationRequest;
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationResponse;
+import lv.javaguru.cms.rest.controllers.course.model.registration.CourseRegistrationRequest;
+import lv.javaguru.cms.rest.controllers.course.model.registration.CourseRegistrationResponse;
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
 import org.junit.Test;
 

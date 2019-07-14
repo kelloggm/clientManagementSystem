@@ -7,8 +7,10 @@ import lv.javaguru.cms.rest.dto.CourseDTO;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class GetCourseService {
 
     @Autowired private SystemUserRightsChecker rightsChecker;

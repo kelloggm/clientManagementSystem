@@ -14,13 +14,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
+@Transactional
 public class CreateCourseService {
 
     @Autowired private SystemUserRightsChecker systemUserRightsChecker;
     @Autowired private CourseRepository courseRepository;
     @Autowired private CourseEntityToDTOConverter courseEntityToDTOConverter;
 
-    @Transactional
     public CourseDTO create(CreateCourseRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.COURSE_MANAGER);
         checkIfCourseAlreadyExist(request);

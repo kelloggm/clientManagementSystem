@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 @Component
+@Transactional
 public class UpdateClientService {
 
     @Autowired private SystemUserRightsChecker systemUserRightsChecker;
     @Autowired private ClientRepository clientRepository;
     @Autowired private ClientEntityToDTOConverter clientEntityToDTOConverter;
 
-    @Transactional
     public ClientDTO update(UpdateClientRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.CLIENT_MANAGER);
         checkIfClientHavePhoneOrEmail(request);

@@ -7,8 +7,10 @@ import lv.javaguru.cms.rest.dto.SystemUserDTO;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class GetSystemUserService {
 
     @Autowired private SystemUserRightsChecker rightsChecker;

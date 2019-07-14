@@ -8,13 +8,15 @@ import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.ClientRepository;
 import lv.javaguru.cms.model.repositories.CourseRegistrationRepository;
 import lv.javaguru.cms.model.repositories.CourseRepository;
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationRequest;
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationResponse;
+import lv.javaguru.cms.rest.controllers.course.model.registration.CourseRegistrationRequest;
+import lv.javaguru.cms.rest.controllers.course.model.registration.CourseRegistrationResponse;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class CourseRegistrationFactory {
 
     @Autowired private SystemUserRightsChecker rightsChecker;

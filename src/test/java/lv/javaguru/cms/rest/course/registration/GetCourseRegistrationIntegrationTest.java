@@ -6,7 +6,7 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import lv.javaguru.cms.model.entities.enums.CourseType;
 import lv.javaguru.cms.model.entities.enums.DayOfTheWeek;
 import lv.javaguru.cms.model.entities.enums.Language;
-import lv.javaguru.cms.rest.controllers.course.model.GetCourseRegistrationResponse;
+import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationResponse;
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
 import org.hamcrest.Matchers;
 import org.junit.Test;

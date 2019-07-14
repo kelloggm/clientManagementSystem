@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class SystemUserRegistrationService {
 
     @Autowired private PasswordEncoder passwordEncoder;
@@ -20,7 +21,6 @@ public class SystemUserRegistrationService {
     @Autowired private SystemUserRepository systemUserRepository;
     @Autowired private SystemUserRoleRepository systemUserRoleRepository;
 
-    @Transactional
     public SystemUserEntity register(SystemUserRegistrationRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN);
         checkIfSystemUserWithSameLoginAlreadyExist(request);

@@ -8,7 +8,7 @@ import lv.javaguru.cms.model.entities.enums.DayOfTheWeek;
 import lv.javaguru.cms.model.entities.enums.Language;
 import lv.javaguru.cms.rest.CmsErrorCategory;
 import lv.javaguru.cms.rest.CmsErrorCode;
-import lv.javaguru.cms.rest.controllers.course.model.GetCourseRegistrationsResponse;
+import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsResponse;
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
 import org.hamcrest.Matchers;
 import org.junit.Test;
