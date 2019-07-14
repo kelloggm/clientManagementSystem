@@ -1,11 +1,7 @@
 package lv.javaguru.cms.rest.controllers.course;
 
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationRequest;
-import lv.javaguru.cms.rest.controllers.course.model.CourseRegistrationResponse;
 import lv.javaguru.cms.rest.controllers.course.model.CreateCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.CreateCourseResponse;
-import lv.javaguru.cms.rest.controllers.course.model.GetCourseRegistrationsRequest;
-import lv.javaguru.cms.rest.controllers.course.model.GetCourseRegistrationsResponse;
 import lv.javaguru.cms.rest.controllers.course.model.GetCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.GetCourseResponse;
 import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesRequest;
@@ -13,9 +9,7 @@ import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesResponse;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseResponse;
 import lv.javaguru.cms.rest.dto.CourseDTO;
-import lv.javaguru.cms.services.course.CourseRegistrationFactory;
 import lv.javaguru.cms.services.course.CreateCourseService;
-import lv.javaguru.cms.services.course.GetCourseRegistrationsService;
 import lv.javaguru.cms.services.course.GetCourseService;
 import lv.javaguru.cms.services.course.SearchCoursesService;
 import lv.javaguru.cms.services.course.UpdateCourseService;
@@ -38,8 +32,6 @@ public class CourseController {
     @Autowired private GetCourseService getCourseService;
     @Autowired private UpdateCourseService updateCourseService;
     @Autowired private SearchCoursesService searchCoursesService;
-    @Autowired private CourseRegistrationFactory courseRegistrationFactory;
-    @Autowired private GetCourseRegistrationsService getCourseRegistrationsService;
 
     @PostMapping(path = "/course", consumes = "application/json", produces = "application/json")
     public CreateCourseResponse register(@Valid @RequestBody CreateCourseRequest request, Principal principal) {
@@ -54,25 +46,6 @@ public class CourseController {
         request.setSystemUserLogin(principal.getName());
         CourseDTO course = getCourseService.get(request);
         return GetCourseResponse.builder().course(course).build();
-    }
-
-    @PostMapping(path = "/course/{courseId}/registration", produces = "application/json")
-    public CourseRegistrationResponse createRegistration(@PathVariable("courseId") Long courseId,
-                                                         @Valid @RequestBody CourseRegistrationRequest request,
-                                                         Principal principal) {
-        if (!Objects.equals(courseId, request.getCourseId())) {
-            throw new IllegalArgumentException("courseId");
-        }
-        request.setSystemUserLogin(principal.getName());
-        return courseRegistrationFactory.create(request);
-    }
-
-    @GetMapping(path = "/course/{courseId}/registration", produces = "application/json")
-    public GetCourseRegistrationsResponse getRegistrations(@PathVariable("courseId") Long courseId,
-                                                           Principal principal) {
-        GetCourseRegistrationsRequest request = GetCourseRegistrationsRequest.builder().courseId(courseId).build();
-        request.setSystemUserLogin(principal.getName());
-        return getCourseRegistrationsService.get(request);
     }
 
     @PutMapping(path = "/course/{courseId}", consumes = "application/json", produces = "application/json")

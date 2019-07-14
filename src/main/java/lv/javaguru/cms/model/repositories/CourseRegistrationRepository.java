@@ -17,4 +17,9 @@ public interface CourseRegistrationRepository
 
     List<CourseRegistrationEntity> findByCourse(CourseEntity course);
 
+    default CourseRegistrationEntity getById(Long registrationId) {
+        return findById(registrationId)
+                .orElseThrow(() -> new IllegalArgumentException("registrationId"));
+    }
+
 }

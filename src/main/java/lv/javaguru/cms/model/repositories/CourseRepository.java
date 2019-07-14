@@ -14,6 +14,11 @@ public interface CourseRepository
         extends JpaRepository<CourseEntity, Long>,
                 JpaSpecificationExecutor<CourseEntity> {
 
+    default CourseEntity getById(Long courseId) {
+        return findById(courseId)
+                .orElseThrow(() -> new IllegalArgumentException("courseId"));
+    }
+
     Optional<CourseEntity> findByTitleAndLanguageAndAddressAndCourseTypeAndStartDateAndEndDate(
             @Param("title") String title,
             @Param("language") Language language,
