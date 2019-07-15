@@ -6,14 +6,11 @@ import lv.javaguru.cms.rest.controllers.course.model.registration.CourseRegistra
 import lv.javaguru.cms.rest.controllers.course.model.registration.CourseRegistrationResponse;
 import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationRequest;
 import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationResponse;
-import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsRequest;
-import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsResponse;
 import lv.javaguru.cms.rest.controllers.course.model.registration.UpdateCourseRegistrationRequest;
 import lv.javaguru.cms.rest.controllers.course.model.registration.UpdateCourseRegistrationResponse;
 import lv.javaguru.cms.services.course.CancelCourseRegistrationService;
 import lv.javaguru.cms.services.course.CourseRegistrationFactory;
 import lv.javaguru.cms.services.course.GetCourseRegistrationService;
-import lv.javaguru.cms.services.course.GetCourseRegistrationsService;
 import lv.javaguru.cms.services.course.UpdateCourseRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,7 +29,6 @@ import java.util.Objects;
 public class CourseRegistrationController {
 
     @Autowired private CourseRegistrationFactory courseRegistrationFactory;
-    @Autowired private GetCourseRegistrationsService getCourseRegistrationsService;
     @Autowired private GetCourseRegistrationService getCourseRegistrationService;
     @Autowired private CancelCourseRegistrationService cancelCourseRegistrationService;
     @Autowired private UpdateCourseRegistrationService updateCourseRegistrationService;
@@ -80,14 +76,5 @@ public class CourseRegistrationController {
         request.setSystemUserLogin(principal.getName());
         return updateCourseRegistrationService.update(request);
     }
-
-    @GetMapping(path = "/course/{courseId}/registration", produces = "application/json")
-    public GetCourseRegistrationsResponse getRegistrations(@PathVariable("courseId") Long courseId,
-                                                           Principal principal) {
-        GetCourseRegistrationsRequest request = GetCourseRegistrationsRequest.builder().courseId(courseId).build();
-        request.setSystemUserLogin(principal.getName());
-        return getCourseRegistrationsService.get(request);
-    }
-
 
 }
