@@ -8,15 +8,19 @@ import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegis
 import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationResponse;
 import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsRequest;
 import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsResponse;
+import lv.javaguru.cms.rest.controllers.course.model.registration.UpdateCourseRegistrationRequest;
+import lv.javaguru.cms.rest.controllers.course.model.registration.UpdateCourseRegistrationResponse;
 import lv.javaguru.cms.services.course.CancelCourseRegistrationService;
 import lv.javaguru.cms.services.course.CourseRegistrationFactory;
 import lv.javaguru.cms.services.course.GetCourseRegistrationService;
 import lv.javaguru.cms.services.course.GetCourseRegistrationsService;
+import lv.javaguru.cms.services.course.UpdateCourseRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +35,7 @@ public class CourseRegistrationController {
     @Autowired private GetCourseRegistrationsService getCourseRegistrationsService;
     @Autowired private GetCourseRegistrationService getCourseRegistrationService;
     @Autowired private CancelCourseRegistrationService cancelCourseRegistrationService;
+    @Autowired private UpdateCourseRegistrationService updateCourseRegistrationService;
 
     @PostMapping(path = "/course/{courseId}/registration", produces = "application/json")
     public CourseRegistrationResponse createRegistration(@PathVariable("courseId") Long courseId,
@@ -64,7 +69,16 @@ public class CourseRegistrationController {
                 .registrationId(registrationId)
                 .build();
         request.setSystemUserLogin(principal.getName());
-        return cancelCourseRegistrationService.get(request);
+        return cancelCourseRegistrationService.cancel(request);
+    }
+
+    @PutMapping(path = "/course/{courseId}/registration/{registrationId}", consumes = "application/json", produces = "application/json")
+    public UpdateCourseRegistrationResponse updateRegistration(@PathVariable("courseId") Long courseId,
+                                                               @PathVariable("registrationId") Long registrationId,
+                                                               @RequestBody UpdateCourseRegistrationRequest request,
+                                                               Principal principal) {
+        request.setSystemUserLogin(principal.getName());
+        return updateCourseRegistrationService.update(request);
     }
 
     @GetMapping(path = "/course/{courseId}/registration", produces = "application/json")
