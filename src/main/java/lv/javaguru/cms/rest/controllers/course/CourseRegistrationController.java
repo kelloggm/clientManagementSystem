@@ -8,10 +8,10 @@ import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegis
 import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationResponse;
 import lv.javaguru.cms.rest.controllers.course.model.registration.UpdateCourseRegistrationRequest;
 import lv.javaguru.cms.rest.controllers.course.model.registration.UpdateCourseRegistrationResponse;
-import lv.javaguru.cms.services.course.CancelCourseRegistrationService;
-import lv.javaguru.cms.services.course.CourseRegistrationFactory;
-import lv.javaguru.cms.services.course.GetCourseRegistrationService;
-import lv.javaguru.cms.services.course.UpdateCourseRegistrationService;
+import lv.javaguru.cms.services.course.registrations.CancelCourseRegistrationService;
+import lv.javaguru.cms.services.course.registrations.CourseRegistrationFactory;
+import lv.javaguru.cms.services.course.registrations.GetCourseRegistrationService;
+import lv.javaguru.cms.services.course.registrations.UpdateCourseRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

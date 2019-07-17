@@ -8,6 +8,7 @@ import lv.javaguru.cms.rest.controllers.client.model.SearchClientsRequest;
 import lv.javaguru.cms.rest.controllers.client.model.SearchClientsResponse;
 import lv.javaguru.cms.rest.controllers.search.SearchCondition;
 import lv.javaguru.cms.rest.dto.ClientDTO;
+import lv.javaguru.cms.rest.dto.converters.ClientDtoConverter;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,7 @@ public class SearchClientsService {
 
     @Autowired private SystemUserRightsChecker rightsChecker;
     @Autowired private ClientRepository clientRepository;
-    @Autowired private ClientEntityToDTOConverter clientEntityToDTOConverter;
+    @Autowired private ClientDtoConverter clientEntityToDTOConverter;
 
     public SearchClientsResponse search(SearchClientsRequest request) {
         rightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.CLIENT_MANAGER);

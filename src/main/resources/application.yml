@@ -19,7 +19,7 @@ spring:
   liquibase:
     change-log: classpath:db/master.xml
     enabled: true
-    contexts: master
+    contexts: master,initial_data
 
 server:
   address: 0.0.0.0

@@ -1,4 +1,4 @@
-package lv.javaguru.cms.services.course;
+package lv.javaguru.cms.services.course.registrations;
 
 import lv.javaguru.cms.model.entities.CourseRegistrationEntity;
 import lv.javaguru.cms.model.entities.enums.SystemUserRole;
@@ -7,6 +7,7 @@ import lv.javaguru.cms.model.repositories.CourseRepository;
 import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsRequest;
 import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsResponse;
 import lv.javaguru.cms.rest.dto.CourseRegistrationDTO;
+import lv.javaguru.cms.rest.dto.converters.CourseRegistrationDtoConverter;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ public class GetCourseRegistrationsService {
     @Autowired private SystemUserRightsChecker rightsChecker;
     @Autowired private CourseRepository courseRepository;
     @Autowired private CourseRegistrationRepository courseRegistrationRepository;
-    @Autowired private CourseRegistrationEntityToDTOConverter converter;
+    @Autowired private CourseRegistrationDtoConverter converter;
 
     public GetCourseRegistrationsResponse get(GetCourseRegistrationsRequest request) {
         rightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.CLIENT_MANAGER);

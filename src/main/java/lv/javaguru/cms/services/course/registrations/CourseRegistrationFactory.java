@@ -1,4 +1,4 @@
-package lv.javaguru.cms.services.course;
+package lv.javaguru.cms.services.course.registrations;
 
 import lv.javaguru.cms.model.entities.ClientEntity;
 import lv.javaguru.cms.model.entities.CourseEntity;

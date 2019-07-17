@@ -1,4 +1,4 @@
-package lv.javaguru.cms.services.client;
+package lv.javaguru.cms.rest.dto.converters;
 
 import lv.javaguru.cms.model.entities.ClientEntity;
 import lv.javaguru.cms.rest.dto.ClientDTO;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-public class ClientEntityToDTOConverter {
+public class ClientDtoConverter {
 
     public ClientDTO convert(ClientEntity clientEntity) {
         ClientDTO client = ClientDTO.builder()

@@ -4,6 +4,7 @@ public enum Tables {
 
     REGISTRATION("course_registration"),
     COURSE("course"),
+    PAYMENT_TEMPLATE("payment_template"),
     CLIENT("client"),
     SYSTEM_USER_ROLE("system_user_role"),
     SYSTEM_USER("system_user");

@@ -1,16 +1,15 @@
-package lv.javaguru.cms.services.course;
+package lv.javaguru.cms.rest.dto.converters;
 
 import lv.javaguru.cms.model.entities.CourseRegistrationEntity;
 import lv.javaguru.cms.rest.dto.CourseRegistrationDTO;
-import lv.javaguru.cms.services.client.ClientEntityToDTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CourseRegistrationEntityToDTOConverter {
+public class CourseRegistrationDtoConverter {
 
-    @Autowired private CourseEntityToDTOConverter courseConverter;
-    @Autowired private ClientEntityToDTOConverter clientConverter;
+    @Autowired private CourseDtoConverter courseConverter;
+    @Autowired private ClientDtoConverter clientConverter;
 
     public CourseRegistrationDTO convert(CourseRegistrationEntity courseRegistration) {
         return CourseRegistrationDTO.builder()

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+        context="initial_data">
+
+    <changeSet id="insert.system_user.data" author="viktors.savonins">
+        <insert tableName="system_user">
+            <column name="id" value="1"/>
+            <column name="first_name" value="admin" />
+            <column name="last_name" value="admin" />
+            <column name="system_login" value="admin" />
+            <column name="system_password" value="$2a$10$FdTumCzNUsJGQYgY3ZiOweEelhuJshSbeBcjmvsXRRv7H4vtYqOy." />
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert.system_user_role.data" author="viktors.savonins">
+        <insert tableName="system_user_role">
+            <column name="id" value="1"/>
+            <column name="system_user_id" value="1" />
+            <column name="system_user_role" value="ADMIN" />
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert.payment_template.data" author="viktors.savonins">
+        <insert tableName="payment_template">
+            <column name="id" value="1"/>
+            <column name="title" value="JavaGuru" />
+            <column name="template_file_path" value="/payment_templates/JavaGuru.docx" />
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="payment_template">
+            <column name="id" value="2"/>
+            <column name="title" value="QAGuru" />
+            <column name="template_file_path" value="/payment_templates/QAGuru.docx" />
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="payment_template">
+            <column name="id" value="3"/>
+            <column name="title" value="ITGuru" />
+            <column name="template_file_path" value="/payment_templates/ITGuru.docx" />
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

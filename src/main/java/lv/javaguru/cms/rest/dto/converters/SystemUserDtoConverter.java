@@ -1,4 +1,4 @@
-package lv.javaguru.cms.services.systemuser;
+package lv.javaguru.cms.rest.dto.converters;
 
 import lv.javaguru.cms.model.entities.SystemUserEntity;
 import lv.javaguru.cms.rest.dto.SystemUserDTO;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-public class SystemUserEntityToDTOConverter {
+public class SystemUserDtoConverter {
 
     public SystemUserDTO convert(SystemUserEntity systemUserEntity) {
         SystemUserDTO systemUser = SystemUserDTO.builder()

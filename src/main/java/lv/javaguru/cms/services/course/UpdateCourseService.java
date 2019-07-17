@@ -5,6 +5,7 @@ import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.CourseRepository;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseRequest;
 import lv.javaguru.cms.rest.dto.CourseDTO;
+import lv.javaguru.cms.rest.dto.converters.CourseDtoConverter;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class UpdateCourseService {
 
     @Autowired private SystemUserRightsChecker systemUserRightsChecker;
     @Autowired private CourseRepository courseRepository;
-    @Autowired private CourseEntityToDTOConverter courseEntityToDTOConverter;
+    @Autowired private CourseDtoConverter courseEntityToDTOConverter;
 
     public CourseDTO update(UpdateCourseRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.COURSE_MANAGER);

@@ -12,7 +12,7 @@ import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegis
 import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsResponse;
 import lv.javaguru.cms.rest.dto.CourseDTO;
 import lv.javaguru.cms.services.course.CreateCourseService;
-import lv.javaguru.cms.services.course.GetCourseRegistrationsService;
+import lv.javaguru.cms.services.course.registrations.GetCourseRegistrationsService;
 import lv.javaguru.cms.services.course.GetCourseService;
 import lv.javaguru.cms.services.course.SearchCoursesService;
 import lv.javaguru.cms.services.course.UpdateCourseService;

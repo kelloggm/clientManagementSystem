@@ -8,6 +8,7 @@ import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesRequest;
 import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesResponse;
 import lv.javaguru.cms.rest.controllers.search.SearchCondition;
 import lv.javaguru.cms.rest.dto.CourseDTO;
+import lv.javaguru.cms.rest.dto.converters.CourseDtoConverter;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,7 @@ public class SearchCoursesService {
 
     @Autowired private SystemUserRightsChecker rightsChecker;
     @Autowired private CourseRepository courseRepository;
-    @Autowired private CourseEntityToDTOConverter courseEntityToDTOConverter;
+    @Autowired private CourseDtoConverter courseEntityToDTOConverter;
 
     public SearchCoursesResponse search(SearchCoursesRequest request) {
         rightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.COURSE_MANAGER);

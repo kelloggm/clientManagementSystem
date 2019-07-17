@@ -1,14 +1,17 @@
-package lv.javaguru.cms.services.course;
+package lv.javaguru.cms.rest.dto.converters;
 
 import lv.javaguru.cms.model.entities.CourseEntity;
 import lv.javaguru.cms.rest.dto.CourseDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class CourseEntityToDTOConverter {
+public class CourseDtoConverter {
+
+    @Autowired private PaymentTemplateDtoConverter paymentTemplateDtoConverter;
 
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM.dd.yyyy");
 
@@ -24,6 +27,7 @@ public class CourseEntityToDTOConverter {
                 .lessonsTimeTo(courseEntity.getLessonsTimeTo())
                 .dayOfTheWeek(courseEntity.getDayOfTheWeek())
                 .fullPrice(courseEntity.getFullPrice())
+                .paymentTemplate(paymentTemplateDtoConverter.convert(courseEntity.getPaymentTemplate()))
                 .build();
         course.setId(courseEntity.getId());
         course.setCreatedAt(convert(courseEntity.getCreatedAt()));

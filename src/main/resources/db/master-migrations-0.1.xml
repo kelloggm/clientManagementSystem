@@ -133,6 +133,45 @@
 
     </changeSet>
 
+    <changeSet author="viktors.savonins" id="create.table.payment_template">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="payment_template"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="payment_template">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_payment_template"/>
+            </column>
+            <column name="title" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="template_file_path" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column defaultValueNumeric="0" name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="modified_by" type="varchar(100)"/>
+        </createTable>
+
+        <createIndex indexName="in_payment_template_title"
+                     tableName="payment_template" unique="true">
+            <column name="title"/>
+        </createIndex>
+
+        <createIndex indexName="in_payment_template_template_file_path"
+                     tableName="payment_template" unique="true">
+            <column name="template_file_path"/>
+        </createIndex>
+    </changeSet>
+
     <changeSet author="viktors.savonins" id="create.table.course">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -174,6 +213,7 @@
             <column name="day_of_the_week" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
+            <column name="payment_template_id" type="BIGINT"/>
 
             <column defaultValueNumeric="0" name="version" type="BIGINT">
                 <constraints nullable="false"/>
@@ -196,6 +236,20 @@
             <column name="end_date"/>
         </createIndex>
 
+        <addForeignKeyConstraint baseColumnNames="payment_template_id"
+                                 baseTableName="course"
+                                 constraintName="fk_course_payment_template_id"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="payment_template"/>
+
+        <createIndex indexName="in_course_payment_template_id"
+                     tableName="course" unique="false">
+            <column name="payment_template_id"/>
+        </createIndex>
     </changeSet>
 
     <changeSet author="viktors.savonins" id="create.table.course_registration">

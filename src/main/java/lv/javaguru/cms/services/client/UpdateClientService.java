@@ -5,6 +5,7 @@ import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.ClientRepository;
 import lv.javaguru.cms.rest.controllers.client.model.UpdateClientRequest;
 import lv.javaguru.cms.rest.dto.ClientDTO;
+import lv.javaguru.cms.rest.dto.converters.ClientDtoConverter;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ public class UpdateClientService {
 
     @Autowired private SystemUserRightsChecker systemUserRightsChecker;
     @Autowired private ClientRepository clientRepository;
-    @Autowired private ClientEntityToDTOConverter clientEntityToDTOConverter;
+    @Autowired private ClientDtoConverter clientEntityToDTOConverter;
 
     public ClientDTO update(UpdateClientRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.CLIENT_MANAGER);
