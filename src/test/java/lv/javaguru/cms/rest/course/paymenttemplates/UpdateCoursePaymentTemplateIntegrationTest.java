@@ -1,4 +1,4 @@
-package lv.javaguru.cms.rest.course.paymenttemplate;
+package lv.javaguru.cms.rest.course.paymenttemplates;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
@@ -16,7 +16,7 @@ public class UpdateCoursePaymentTemplateIntegrationTest extends RestIntegrationT
     @DatabaseSetup(value = "classpath:dbunit/paymenttemplate/update_course_payment_template/updateCoursePaymentTemplate-CourseManager-sutupDataset.xml")
     @ExpectedDatabase(value = "classpath:dbunit/paymenttemplate/update_course_payment_template/updateCoursePaymentTemplate-CourseManager-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
-    public void shouldGetCourseRegistrationsWithClientManagerRole() {
+    public void shouldUpdateCoursePaymentTemplateWithCourseManagerRole() {
         UpdateCoursePaymentTemplateRequest request = UpdateCoursePaymentTemplateRequest.builder()
                 .courseId(1L)
                 .paymentTemplateId(1L)

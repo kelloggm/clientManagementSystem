@@ -1,4 +1,4 @@
-package lv.javaguru.cms.services.course;
+package lv.javaguru.cms.services.course.paymenttemplates;
 
 import lv.javaguru.cms.model.entities.CourseEntity;
 import lv.javaguru.cms.model.entities.PaymentTemplateEntity;
