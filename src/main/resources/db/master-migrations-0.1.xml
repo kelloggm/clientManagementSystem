@@ -272,6 +272,12 @@
             <column name="status" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
+            <column name="bill_count" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="one_bill_amount" type="INT">
+                <constraints nullable="false"/>
+            </column>
 
             <column defaultValueNumeric="0" name="version" type="BIGINT">
                 <constraints nullable="false"/>

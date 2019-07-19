@@ -21,4 +21,8 @@ public class CourseParticipantDTO extends BaseDTO {
 
     private String status;
 
+    private Integer billCount;
+
+    private Integer oneBillAmount;
+
 }

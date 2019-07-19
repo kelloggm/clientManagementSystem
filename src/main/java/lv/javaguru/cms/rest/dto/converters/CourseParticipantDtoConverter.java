@@ -16,6 +16,8 @@ public class CourseParticipantDtoConverter {
                 .course(courseConverter.convert(entity.getCourse()))
                 .client(clientConverter.convert(entity.getClient()))
                 .status(entity.getStatus().name())
+                .billCount(entity.getBillCount())
+                .oneBillAmount(entity.getOneBillAmount())
                 .build();
     }
 

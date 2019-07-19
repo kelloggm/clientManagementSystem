@@ -38,4 +38,10 @@ public class CourseParticipantEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CourseParticipantStatus status;
 
+    @Column(name = "bill_count", nullable = false)
+    private Integer billCount;
+
+    @Column(name = "one_bill_amount", nullable = false)
+    private Integer oneBillAmount;
+
 }

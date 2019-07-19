@@ -24,7 +24,12 @@ public class CreateCourseParticipantIntegrationTest extends RestIntegrationTest 
     @ExpectedDatabase(value = "classpath:dbunit/participant/create_participant/participant-ClientManager-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldRegisterClientToCourseWithClientManagerRole() {
-        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder().courseId(1L).clientId(1L).build();
+        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder()
+                .courseId(1L)
+                .clientId(1L)
+                .billCount(1)
+                .oneBillAmount(100)
+                .build();
         CreateCourseParticipantResponse response = sendRequest(CLIENT_MANAGER_LOGIN, CLIENT_MANAGER_PASSWORD, request);
         assertThat(response.isOk(), is(true));
         assertThat(response.getErrors(), is(nullValue()));
@@ -36,7 +41,12 @@ public class CreateCourseParticipantIntegrationTest extends RestIntegrationTest 
     @ExpectedDatabase(value = "classpath:dbunit/participant/create_participant/participant-Admin-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldRegisterClientToCourseWithAdminManagerRole() {
-        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder().courseId(1L).clientId(1L).build();
+        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder()
+                .courseId(1L)
+                .clientId(1L)
+                .billCount(1)
+                .oneBillAmount(100)
+                .build();
         CreateCourseParticipantResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(true));
         assertThat(response.getErrors(), is(nullValue()));
@@ -48,7 +58,12 @@ public class CreateCourseParticipantIntegrationTest extends RestIntegrationTest 
     @ExpectedDatabase(value = "classpath:dbunit/participant/create_participant/participant-Admin-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnValidationErrorWhenCourseNotFound() {
-        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder().courseId(9999L).clientId(1L).build();
+        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder()
+                .courseId(9999L)
+                .clientId(1L)
+                .billCount(1)
+                .oneBillAmount(100)
+                .build();
         CreateCourseParticipantResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
@@ -62,7 +77,12 @@ public class CreateCourseParticipantIntegrationTest extends RestIntegrationTest 
     @ExpectedDatabase(value = "classpath:dbunit/participant/create_participant/participant-Admin-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnValidationErrorWhenClientNotFound() {
-        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder().courseId(1L).clientId(99999L).build();
+        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder()
+                .courseId(1L)
+                .clientId(9999L)
+                .billCount(1)
+                .oneBillAmount(100)
+                .build();
         CreateCourseParticipantResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
@@ -76,7 +96,12 @@ public class CreateCourseParticipantIntegrationTest extends RestIntegrationTest 
     @ExpectedDatabase(value = "classpath:dbunit/participant/create_participant/participant-Admin-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnValidationErrorWhenClientAlreadyRegisteredToCourse() {
-        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder().courseId(1L).clientId(1L).build();
+        CreateCourseParticipantRequest request = CreateCourseParticipantRequest.builder()
+                .courseId(1L)
+                .clientId(1L)
+                .billCount(1)
+                .oneBillAmount(100)
+                .build();
         CreateCourseParticipantResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));

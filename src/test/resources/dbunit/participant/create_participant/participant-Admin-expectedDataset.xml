@@ -40,10 +40,12 @@
     />
 
     <course_participant id="1"
-                         course_id="1"
-                         client_id="1"
-                         status="ACTIVE"
-                         modified_by="admin"
+                        course_id="1"
+                        client_id="1"
+                        status="ACTIVE"
+                        bill_count="1"
+                        one_bill_amount="100"
+                        modified_by="admin"
     />
 
 </dataset>

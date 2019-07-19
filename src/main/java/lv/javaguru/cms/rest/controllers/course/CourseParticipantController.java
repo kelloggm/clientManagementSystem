@@ -9,7 +9,7 @@ import lv.javaguru.cms.rest.controllers.course.model.participant.GetCoursePartic
 import lv.javaguru.cms.rest.controllers.course.model.participant.UpdateCourseParticipantRequest;
 import lv.javaguru.cms.rest.controllers.course.model.participant.UpdateCourseParticipantResponse;
 import lv.javaguru.cms.services.course.participants.CancelCourseParticipantService;
-import lv.javaguru.cms.services.course.participants.CourseParticipantFactory;
+import lv.javaguru.cms.services.course.participants.CreateCourseParticipantService;
 import lv.javaguru.cms.services.course.participants.GetCourseParticipantService;
 import lv.javaguru.cms.services.course.participants.UpdateCourseParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import java.util.Objects;
 @RestController
 public class CourseParticipantController {
 
-    @Autowired private CourseParticipantFactory courseParticipantFactory;
+    @Autowired private CreateCourseParticipantService createCourseParticipantService;
     @Autowired private GetCourseParticipantService getCourseParticipantService;
     @Autowired private CancelCourseParticipantService cancelCourseParticipantService;
     @Autowired private UpdateCourseParticipantService updateCourseParticipantService;
@@ -41,7 +41,7 @@ public class CourseParticipantController {
             throw new IllegalArgumentException("courseId");
         }
         request.setSystemUserLogin(principal.getName());
-        return courseParticipantFactory.create(request);
+        return createCourseParticipantService.create(request);
     }
 
     @GetMapping(path = "/course/{courseId}/participant/{participantId}", produces = "application/json")

@@ -1,4 +1,4 @@
-package lv.javaguru.cms.rest.controllers.course.model.participant;
+package lv.javaguru.cms.rest.controllers.course.model.bill;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,18 +16,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class CreateCourseParticipantRequest extends BaseRequest {
+public class CreateCourseParticipantBillRequest extends BaseRequest {
 
     @NotNull
     private Long courseId;
 
     @NotNull
-    private Long clientId;
-
-    @NotNull
-    private Integer billCount;
-
-    @NotNull
-    private Integer oneBillAmount;
+    private Long participantId;
 
 }

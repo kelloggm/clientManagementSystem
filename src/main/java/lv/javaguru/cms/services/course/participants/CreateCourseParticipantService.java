@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Transactional
-public class CourseParticipantFactory {
+public class CreateCourseParticipantService {
 
     @Autowired private SystemUserRightsChecker rightsChecker;
     @Autowired private CourseRepository courseRepository;
@@ -35,6 +35,8 @@ public class CourseParticipantFactory {
                 .course(course)
                 .client(client)
                 .status(CourseParticipantStatus.ACTIVE)
+                .billCount(request.getBillCount())
+                .oneBillAmount(request.getOneBillAmount())
                 .build();
         participant.setModifiedBy(request.getSystemUserLogin());
         participant = courseParticipantRepository.save(participant);
