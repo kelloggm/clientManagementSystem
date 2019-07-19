@@ -8,11 +8,11 @@ import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesRequest;
 import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesResponse;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseResponse;
-import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsRequest;
-import lv.javaguru.cms.rest.controllers.course.model.registration.GetCourseRegistrationsResponse;
+import lv.javaguru.cms.rest.controllers.course.model.participant.GetCourseParticipantsRequest;
+import lv.javaguru.cms.rest.controllers.course.model.participant.GetCourseParticipantsResponse;
 import lv.javaguru.cms.rest.dto.CourseDTO;
 import lv.javaguru.cms.services.course.CreateCourseService;
-import lv.javaguru.cms.services.course.registrations.GetCourseRegistrationsService;
+import lv.javaguru.cms.services.course.participants.GetCourseParticipantsService;
 import lv.javaguru.cms.services.course.GetCourseService;
 import lv.javaguru.cms.services.course.SearchCoursesService;
 import lv.javaguru.cms.services.course.UpdateCourseService;
@@ -35,7 +35,7 @@ public class CourseController {
     @Autowired private GetCourseService getCourseService;
     @Autowired private UpdateCourseService updateCourseService;
     @Autowired private SearchCoursesService searchCoursesService;
-    @Autowired private GetCourseRegistrationsService getCourseRegistrationsService;
+    @Autowired private GetCourseParticipantsService getCourseParticipantsService;
 
     @PostMapping(path = "/course", consumes = "application/json", produces = "application/json")
     public CreateCourseResponse register(@Valid @RequestBody CreateCourseRequest request, Principal principal) {
@@ -70,12 +70,12 @@ public class CourseController {
         return searchCoursesService.search(request);
     }
 
-    @GetMapping(path = "/course/{courseId}/registration", produces = "application/json")
-    public GetCourseRegistrationsResponse getRegistrations(@PathVariable("courseId") Long courseId,
-                                                           Principal principal) {
-        GetCourseRegistrationsRequest request = GetCourseRegistrationsRequest.builder().courseId(courseId).build();
+    @GetMapping(path = "/course/{courseId}/participants", produces = "application/json")
+    public GetCourseParticipantsResponse getParticipants(@PathVariable("courseId") Long courseId,
+                                                         Principal principal) {
+        GetCourseParticipantsRequest request = GetCourseParticipantsRequest.builder().courseId(courseId).build();
         request.setSystemUserLogin(principal.getName());
-        return getCourseRegistrationsService.get(request);
+        return getCourseParticipantsService.get(request);
     }
 
 }

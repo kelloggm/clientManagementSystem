@@ -252,16 +252,16 @@
         </createIndex>
     </changeSet>
 
-    <changeSet author="viktors.savonins" id="create.table.course_registration">
+    <changeSet author="viktors.savonins" id="create.table.course_participant">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="course_registration"/>
+                <tableExists tableName="course_participant"/>
             </not>
         </preConditions>
 
-        <createTable tableName="course_registration">
+        <createTable tableName="course_participant">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" primaryKeyName="pk_course_registration"/>
+                <constraints primaryKey="true" primaryKeyName="pk_course_participant"/>
             </column>
             <column name="course_id" type="bigint">
                 <constraints nullable="false"/>
@@ -284,8 +284,8 @@
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="course_id"
-                                 baseTableName="course_registration"
-                                 constraintName="fk_course_registration_course_id"
+                                 baseTableName="course_participant"
+                                 constraintName="fk_course_participant_course_id"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="NO ACTION"
@@ -294,8 +294,8 @@
                                  referencedTableName="course"/>
 
         <addForeignKeyConstraint baseColumnNames="client_id"
-                                 baseTableName="course_registration"
-                                 constraintName="fk_course_registration_client_id"
+                                 baseTableName="course_participant"
+                                 constraintName="fk_course_participant_client_id"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="NO ACTION"
@@ -303,18 +303,18 @@
                                  referencedColumnNames="id"
                                  referencedTableName="client"/>
 
-        <createIndex indexName="in_course_registration_course_id"
-                     tableName="course_registration" unique="false">
+        <createIndex indexName="in_course_participant_course_id"
+                     tableName="course_participant" unique="false">
             <column name="course_id"/>
         </createIndex>
 
-        <createIndex indexName="in_course_registration_client_id"
-                     tableName="course_registration" unique="false">
+        <createIndex indexName="in_course_participant_client_id"
+                     tableName="course_participant" unique="false">
             <column name="client_id"/>
         </createIndex>
 
-        <createIndex indexName="in_course_registration_course_id_client_id"
-                     tableName="course_registration" unique="true">
+        <createIndex indexName="in_course_participant_course_id_client_id"
+                     tableName="course_participant" unique="true">
             <column name="course_id"/>
             <column name="client_id"/>
         </createIndex>

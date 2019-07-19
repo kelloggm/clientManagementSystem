@@ -2,7 +2,7 @@ package lv.javaguru.cms.model.entities;
 
 public enum Tables {
 
-    REGISTRATION("course_registration"),
+    PARTICIPANT("course_participant"),
     COURSE("course"),
     PAYMENT_TEMPLATE("payment_template"),
     CLIENT("client"),
