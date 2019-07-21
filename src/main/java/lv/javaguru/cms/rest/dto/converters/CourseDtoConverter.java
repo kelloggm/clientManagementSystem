@@ -15,25 +15,26 @@ public class CourseDtoConverter {
 
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM.dd.yyyy");
 
-    public CourseDTO convert(CourseEntity courseEntity) {
-        CourseDTO course = CourseDTO.builder()
-                .title(courseEntity.getTitle())
-                .language(courseEntity.getLanguage())
-                .startDate(courseEntity.getStartDate().format(dateFormatter))
-                .endDate(courseEntity.getEndDate().format(dateFormatter))
-                .courseType(courseEntity.getCourseType())
-                .address(courseEntity.getAddress())
-                .lessonsTimeFrom(courseEntity.getLessonsTimeFrom())
-                .lessonsTimeTo(courseEntity.getLessonsTimeTo())
-                .dayOfTheWeek(courseEntity.getDayOfTheWeek())
-                .fullPrice(courseEntity.getFullPrice())
-                .paymentTemplate(paymentTemplateDtoConverter.convert(courseEntity.getPaymentTemplate()))
+    public CourseDTO convert(CourseEntity entity) {
+        CourseDTO dto = CourseDTO.builder()
+                .title(entity.getTitle())
+                .language(entity.getLanguage())
+                .startDate(entity.getStartDate().format(dateFormatter))
+                .endDate(entity.getEndDate().format(dateFormatter))
+                .courseType(entity.getCourseType())
+                .address(entity.getAddress())
+                .lessonsTimeFrom(entity.getLessonsTimeFrom())
+                .lessonsTimeTo(entity.getLessonsTimeTo())
+                .dayOfTheWeek(entity.getDayOfTheWeek())
+                .fullPrice(entity.getFullPrice())
+                .paymentTemplate(paymentTemplateDtoConverter.convert(entity.getPaymentTemplate()))
+                .billPrefix(entity.getBillPrefix())
                 .build();
-        course.setId(courseEntity.getId());
-        course.setCreatedAt(convert(courseEntity.getCreatedAt()));
-        course.setModifiedAt(convert(courseEntity.getModifiedAt()));
-        course.setModifiedBy(courseEntity.getModifiedBy());
-        return course;
+        dto.setId(entity.getId());
+        dto.setCreatedAt(convert(entity.getCreatedAt()));
+        dto.setModifiedAt(convert(entity.getModifiedAt()));
+        dto.setModifiedBy(entity.getModifiedBy());
+        return dto;
     }
 
     private String convert(LocalDateTime dateTime) {

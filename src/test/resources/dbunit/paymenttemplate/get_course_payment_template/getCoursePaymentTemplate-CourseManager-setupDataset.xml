@@ -30,6 +30,7 @@
             day_of_the_week = "MONDAY"
             full_price = "400"
             payment_template_id="1"
+            bill_prefix = "JA1-2019-"
             modified_by="course_manager_login"
     />
 

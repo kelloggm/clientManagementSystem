@@ -29,5 +29,6 @@ public class CourseDTO extends BaseDTO {
     private DayOfTheWeek dayOfTheWeek;
     private Integer fullPrice;
     private PaymentTemplateDTO paymentTemplate;
+    private String billPrefix;
 
 }

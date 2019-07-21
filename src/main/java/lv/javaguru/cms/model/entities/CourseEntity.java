@@ -66,4 +66,7 @@ public class CourseEntity extends BaseEntity {
     @JoinColumn(name = "payment_template_id")
     private PaymentTemplateEntity paymentTemplate;
 
+    @Column(name = "bill_prefix", nullable = false)
+    private String billPrefix;
+
 }

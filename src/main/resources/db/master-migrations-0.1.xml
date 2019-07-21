@@ -214,6 +214,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="payment_template_id" type="BIGINT"/>
+            <column name="bill_prefix" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
 
             <column defaultValueNumeric="0" name="version" type="BIGINT">
                 <constraints nullable="false"/>
@@ -325,5 +328,57 @@
             <column name="client_id"/>
         </createIndex>
     </changeSet>
+
+    <changeSet author="viktors.savonins" id="create.table.bill">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="bill"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="bill">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_bill"/>
+            </column>
+            <column name="course_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="course_participant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_template_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bill_prefix" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bill_number" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bill_part" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bill_file_path" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pay_to" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bill_sum" type="INT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column defaultValueNumeric="0" name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="modified_by" type="varchar(100)"/>
+        </createTable>
+
+    </changeSet>
+
 
 </databaseChangeLog>

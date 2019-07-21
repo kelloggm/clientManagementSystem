@@ -16,12 +16,15 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class CreateCourseParticipantBillRequest extends BaseRequest {
+public class CreateBillRequest extends BaseRequest {
 
     @NotNull
     private Long courseId;
 
     @NotNull
     private Long participantId;
+
+    @NotNull
+    private Integer billPart;
 
 }

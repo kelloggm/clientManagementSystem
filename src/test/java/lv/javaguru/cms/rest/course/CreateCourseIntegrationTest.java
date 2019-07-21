@@ -102,6 +102,7 @@ public class CreateCourseIntegrationTest extends RestIntegrationTest {
                 .lessonsTimeTo("21:00")
                 .dayOfTheWeek(DayOfTheWeek.MONDAY)
                 .fullPrice(400)
+                .billPrefix("JA1-2019-")
                 .build();
     }
 
