@@ -33,8 +33,8 @@ public class BillEntity extends BaseEntity {
     private CourseParticipantEntity courseParticipant;
 
     @ManyToOne
-    @JoinColumn(name = "payment_template_id")
-    private PaymentTemplateEntity paymentTemplate;
+    @JoinColumn(name = "company_id")
+    private CompanyEntity company;
 
     @Column(name = "bill_prefix", nullable = false)
     private String billPrefix;

@@ -1,17 +1,20 @@
-package lv.javaguru.cms.rest.controllers.course.model.paymenttemplate;
+package lv.javaguru.cms.rest.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lv.javaguru.cms.rest.BaseResponse;
 
 @Data
 @Builder
-@ToString
+@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class DeleteCoursePaymentTemplateResponse extends BaseResponse {
+@ToString(callSuper = true)
+public class CompanyDTO extends BaseDTO {
+
+    private String title;
 
 }

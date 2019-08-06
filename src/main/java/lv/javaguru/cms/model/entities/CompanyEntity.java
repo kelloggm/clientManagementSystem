@@ -12,19 +12,16 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "payment_template")
+@Table(name = "company")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class PaymentTemplateEntity extends BaseEntity {
+public class CompanyEntity extends BaseEntity {
 
     @Column(name = "title", nullable = false)
     private String title;
-
-    @Column(name = "template_file_path", nullable = false)
-    private String templateFilePath;
 
 }

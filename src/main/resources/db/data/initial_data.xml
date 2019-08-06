@@ -24,23 +24,20 @@
         </insert>
     </changeSet>
 
-    <changeSet id="insert.payment_template.data" author="viktors.savonins">
-        <insert tableName="payment_template">
+    <changeSet id="insert.company.data" author="viktors.savonins">
+        <insert tableName="company">
             <column name="id" value="1"/>
             <column name="title" value="JavaGuru" />
-            <column name="template_file_path" value="/payment_templates/JavaGuru.docx" />
             <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
         </insert>
-        <insert tableName="payment_template">
+        <insert tableName="company">
             <column name="id" value="2"/>
             <column name="title" value="QAGuru" />
-            <column name="template_file_path" value="/payment_templates/QAGuru.docx" />
             <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
         </insert>
-        <insert tableName="payment_template">
+        <insert tableName="company">
             <column name="id" value="3"/>
             <column name="title" value="ITGuru" />
-            <column name="template_file_path" value="/payment_templates/ITGuru.docx" />
             <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
         </insert>
     </changeSet>

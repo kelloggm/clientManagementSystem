@@ -31,7 +31,7 @@ public class CreateCourseParticipantBillService {
             throw new IllegalArgumentException("courseId");
         }
 
-        /*PaymentTemplateEntity paymentTemplate = course.getPaymentTemplate();
+        /*CompanyEntity paymentTemplate = course.getPaymentTemplate();
         if (paymentTemplate == null) {
             throw new IllegalArgumentException("Payment Template not specified for course with id = " + course.getId());
         }

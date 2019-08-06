@@ -133,21 +133,18 @@
 
     </changeSet>
 
-    <changeSet author="viktors.savonins" id="create.table.payment_template">
+    <changeSet author="viktors.savonins" id="create.table.company">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="payment_template"/>
+                <tableExists tableName="company"/>
             </not>
         </preConditions>
 
-        <createTable tableName="payment_template">
+        <createTable tableName="company">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" primaryKeyName="pk_payment_template"/>
+                <constraints primaryKey="true" primaryKeyName="pk_company"/>
             </column>
             <column name="title" type="VARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="template_file_path" type="VARCHAR(500)">
                 <constraints nullable="false"/>
             </column>
 
@@ -161,14 +158,9 @@
             <column name="modified_by" type="varchar(100)"/>
         </createTable>
 
-        <createIndex indexName="in_payment_template_title"
-                     tableName="payment_template" unique="true">
+        <createIndex indexName="in_company_title"
+                     tableName="company" unique="true">
             <column name="title"/>
-        </createIndex>
-
-        <createIndex indexName="in_payment_template_template_file_path"
-                     tableName="payment_template" unique="true">
-            <column name="template_file_path"/>
         </createIndex>
     </changeSet>
 
@@ -328,7 +320,7 @@
             <column name="course_participant_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="payment_template_id" type="bigint">
+            <column name="company_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="bill_prefix" type="varchar(100)">
