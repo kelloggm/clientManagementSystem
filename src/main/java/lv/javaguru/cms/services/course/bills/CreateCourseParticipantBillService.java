@@ -2,7 +2,6 @@ package lv.javaguru.cms.services.course.bills;
 
 import lv.javaguru.cms.model.entities.CourseEntity;
 import lv.javaguru.cms.model.entities.CourseParticipantEntity;
-import lv.javaguru.cms.model.entities.PaymentTemplateEntity;
 import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.BillRepository;
 import lv.javaguru.cms.model.repositories.CourseParticipantRepository;
@@ -32,11 +31,11 @@ public class CreateCourseParticipantBillService {
             throw new IllegalArgumentException("courseId");
         }
 
-        PaymentTemplateEntity paymentTemplate = course.getPaymentTemplate();
+        /*PaymentTemplateEntity paymentTemplate = course.getPaymentTemplate();
         if (paymentTemplate == null) {
             throw new IllegalArgumentException("Payment Template not specified for course with id = " + course.getId());
         }
-
+*/
         billRepository.findByCourseAndCourseParticipantAndBillPart(
                 course, courseParticipant, request.getBillPart()
         ).ifPresent(bill -> {
