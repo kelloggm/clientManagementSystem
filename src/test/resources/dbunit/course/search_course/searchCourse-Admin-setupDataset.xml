@@ -23,7 +23,6 @@
             lessons_time_to = "21:00"
             day_of_the_week = "MONDAY"
             full_price = "400"
-            bill_prefix = "JA1-2019-"
             modified_by="admin"
     />
 
@@ -38,7 +37,6 @@
             lessons_time_to = "21:00"
             day_of_the_week = "MONDAY"
             full_price = "777"
-            bill_prefix = "JA1-2019-"
             modified_by="admin"
     />
 

@@ -28,7 +28,6 @@ public class CourseDtoConverter {
                 .dayOfTheWeek(entity.getDayOfTheWeek())
                 .fullPrice(entity.getFullPrice())
                 .paymentTemplate(paymentTemplateDtoConverter.convert(entity.getPaymentTemplate()))
-                .billPrefix(entity.getBillPrefix())
                 .build();
         dto.setId(entity.getId());
         dto.setCreatedAt(convert(entity.getCreatedAt()));

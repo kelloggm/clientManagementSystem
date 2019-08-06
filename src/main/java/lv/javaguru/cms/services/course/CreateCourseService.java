@@ -43,7 +43,6 @@ public class CreateCourseService {
                                           .lessonsTimeTo(request.getLessonsTimeTo())
                                           .dayOfTheWeek(request.getDayOfTheWeek())
                                           .fullPrice(request.getFullPrice())
-                                          .billPrefix(request.getBillPrefix())
                                           .build();
         course.setModifiedBy(request.getSystemUserLogin());
         return course;

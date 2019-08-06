@@ -1,6 +1,5 @@
 package lv.javaguru.cms.services.course.bills;
 
-import lv.javaguru.cms.model.entities.ClientEntity;
 import lv.javaguru.cms.model.entities.CourseEntity;
 import lv.javaguru.cms.model.entities.CourseParticipantEntity;
 import lv.javaguru.cms.model.entities.PaymentTemplateEntity;
@@ -45,10 +44,11 @@ public class CreateCourseParticipantBillService {
         });
 
         // Calculate bill number
-
-        // Calculate bill part
+        //Optional<BillEntity> lastBillWithSamePrefix = billRepository.findFirstByBillPrefixOrderByBillNumberDesc(billPrefix);
+        //int billNumber = lastBillWithSamePrefix.map(billEntity -> billEntity.getBillNumber() + 1).orElse(1);
 
         // Create bill word document using poi
+
 
         // Create BillEntity
 
@@ -56,13 +56,6 @@ public class CreateCourseParticipantBillService {
         return CreateBillResponse.builder()
                 //.billId()
                 .build();
-    }
-
-    private void checkIfClientAlreadyRegisteredToThisCourse(CourseEntity course, ClientEntity client) {
-        courseParticipantRepository.findByCourseAndClient(course, client)
-                .ifPresent(courseParticipant -> {
-                    throw new IllegalArgumentException("Client already registered to this course");
-                });
     }
 
     private CourseEntity getCourse(CreateBillRequest request) {

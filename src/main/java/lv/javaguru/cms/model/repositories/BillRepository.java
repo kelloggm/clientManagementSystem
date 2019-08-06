@@ -16,4 +16,7 @@ public interface BillRepository
                                                                      CourseParticipantEntity courseParticipant,
                                                                      Integer billPart);
 
+
+    Optional<BillEntity> findFirstByBillPrefixOrderByBillNumberDesc(String billPrefix);
+
 }

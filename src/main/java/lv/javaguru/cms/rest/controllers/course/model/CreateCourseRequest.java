@@ -51,7 +51,4 @@ public class CreateCourseRequest extends BaseRequest {
     @NotNull
     private Integer fullPrice;
 
-    @NotNull
-    private String billPrefix;
-
 }

@@ -38,6 +38,9 @@ dependencies {
     implementation 'org.liquibase:liquibase-core:3.5.5'
     implementation 'com.zaxxer:HikariCP:2.7.9'
     implementation 'com.h2database:h2:1.4.196'
+    implementation 'org.apache.poi:poi:3.15'
+    implementation 'org.apache.poi:poi-scratchpad:3.15'
+    implementation 'org.apache.poi:poi-ooxml:3.15'
     
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'junit:junit:4.12'
