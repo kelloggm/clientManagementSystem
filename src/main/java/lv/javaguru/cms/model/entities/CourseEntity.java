@@ -60,4 +60,7 @@ public class CourseEntity extends BaseEntity {
     @Column(name = "full_price", nullable = false)
     private Integer fullPrice;
 
+    @Column(name = "bill_prefix", nullable = false)
+    private String billPrefix;
+
 }

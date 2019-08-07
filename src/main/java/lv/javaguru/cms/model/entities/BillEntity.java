@@ -45,9 +45,6 @@ public class BillEntity extends BaseEntity {
     @Column(name = "bill_part", nullable = false)
     private Integer billPart;
 
-    @Column(name = "bill_file_path", nullable = false)
-    private String billFilePath;
-
     @Column(name = "pay_to", nullable = false)
     private LocalDateTime payTo;
 

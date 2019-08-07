@@ -147,6 +147,24 @@
             <column name="title" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
+            <column name="registration_number" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="legal_address" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bank_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bank_account" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="member_of_the_board" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pvn_payer" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
 
             <column defaultValueNumeric="0" name="version" type="BIGINT">
                 <constraints nullable="false"/>
@@ -197,6 +215,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="full_price" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bill_prefix" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="course_type" type="varchar(100)">
@@ -330,9 +351,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="bill_part" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="bill_file_path" type="varchar(300)">
                 <constraints nullable="false"/>
             </column>
             <column name="pay_to" type="TIMESTAMP WITH TIME ZONE">

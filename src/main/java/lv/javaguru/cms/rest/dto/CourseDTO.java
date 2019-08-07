@@ -28,5 +28,6 @@ public class CourseDTO extends BaseDTO {
     private String lessonsTimeTo;
     private DayOfTheWeek dayOfTheWeek;
     private Integer fullPrice;
+    private String billPrefix;
 
 }

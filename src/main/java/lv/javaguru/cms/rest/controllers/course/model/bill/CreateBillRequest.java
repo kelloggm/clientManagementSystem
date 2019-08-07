@@ -25,6 +25,9 @@ public class CreateBillRequest extends BaseRequest {
     private Long participantId;
 
     @NotNull
+    private Long companyId;
+
+    @NotNull
     private Integer billPart;
 
 }

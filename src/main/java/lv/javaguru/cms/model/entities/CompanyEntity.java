@@ -24,4 +24,22 @@ public class CompanyEntity extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
+    @Column(name = "registration_number", nullable = false)
+    private String registrationNumber;
+
+    @Column(name = "legal_address", nullable = false)
+    private String legalAddress;
+
+    @Column(name = "bank_name", nullable = false)
+    private String bankName;
+
+    @Column(name = "bank_account", nullable = false)
+    private String bankAccount;
+
+    @Column(name = "member_of_the_board", nullable = false)
+    private String memberOfTheBoard;
+
+    @Column(name = "pvn_payer", nullable = false)
+    private boolean pvnPayer;
+
 }

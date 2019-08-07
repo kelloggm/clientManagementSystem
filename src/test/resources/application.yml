@@ -32,3 +32,13 @@ management:
 logging:
   config: classpath:logback-spring.xml
   path: logs
+
+bill:
+  validDays: 10
+  storage:
+    micro: C:\work\projects\JavaGuruLV\Client_Management_System\src\test\resources\bill_storage\micro
+    pvn: C:\work\projects\JavaGuruLV\Client_Management_System\src\test\resources\bill_storage\pvn
+  templates:
+    micro: bill_templates/microBillTemplate.docx
+    pvn: bill_templates/pvnBillTemplate.docx
+

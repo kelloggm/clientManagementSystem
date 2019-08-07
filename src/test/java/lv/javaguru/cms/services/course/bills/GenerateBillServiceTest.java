@@ -7,14 +7,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GenerateBillServiceTest extends RestIntegrationTest {
 
     @Autowired
-    private GenerateBillService service;
+    private MicroBillGenerationService service;
 
     @Test
     public void shouldGenerateNewBill() {
-        String templateFilePath = "C:\\work\\projects\\JavaGuruLV\\Client_Management_System\\src\\test\\resources\\payment_templates\\JavaGuru-Template.docx";
-        String newBillFilePath = "C:\\work\\projects\\JavaGuruLV\\Client_Management_System\\src\\test\\resources\\payment_templates\\JavaGuru-JA1-2019.docx";
-
-        service.generate(templateFilePath, newBillFilePath);
+        BillParameters billParameters = BillParameters.builder()
+            .billNumber("JA1-2019-121")
+            .billCreationDate("23.08.2019")
+            .companyTitle("JavaGuruLV")
+            .companyAddress("S.Eizenšteina 59-12, Rīga, LV-1079")
+            .companyBankName("Swedbank")
+            .companyBankAccount("LV46HABA0551043273217")
+            .companyRegistrationNumber("40203054690")
+            .courseParticipant("Jānis Aldiņš")
+            .billDueDate("31.08.2019")
+            .courseTitle("Java 1 – Introduction to Java")
+            .courseStartDate("01.05.2019")
+            .courseEndDate("31.08.2019")
+            .courseAddress("Rīga, Skolas iela 21, 508c kabinets")
+            .billPrice("120.00")
+            .billPart("1")
+            .billPartTotal("3")
+            .companyMemberOfTheBoard("Viktors Savoņins")
+            .build();
+        service.generate(billParameters);
     }
 
 }

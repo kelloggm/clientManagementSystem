@@ -1,4 +1,4 @@
-package lv.javaguru.cms.rest.dto;
+package lv.javaguru.cms.rest.controllers.company.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,21 +6,37 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lv.javaguru.cms.rest.BaseRequest;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
-@AllArgsConstructor
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
-public class CompanyDTO extends BaseDTO {
+public class CreateCompanyRequest extends BaseRequest {
 
+    @NotNull
     private String title;
+
+    @NotNull
     private String registrationNumber;
+
+    @NotNull
     private String legalAddress;
+
+    @NotNull
     private String bankName;
+
+    @NotNull
     private String bankAccount;
+
+    @NotNull
     private String memberOfTheBoard;
+
+    @NotNull
     private Boolean pvnPayer;
 
 }

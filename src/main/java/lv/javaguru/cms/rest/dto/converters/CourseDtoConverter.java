@@ -24,6 +24,7 @@ public class CourseDtoConverter {
                 .lessonsTimeTo(entity.getLessonsTimeTo())
                 .dayOfTheWeek(entity.getDayOfTheWeek())
                 .fullPrice(entity.getFullPrice())
+                .billPrefix(entity.getBillPrefix())
                 .build();
         dto.setId(entity.getId());
         dto.setCreatedAt(convert(entity.getCreatedAt()));
