@@ -4,9 +4,12 @@ import lv.javaguru.cms.rest.controllers.course.model.bill.CreateBillRequest;
 import lv.javaguru.cms.rest.controllers.course.model.bill.CreateBillResponse;
 import lv.javaguru.cms.rest.controllers.course.model.bill.GetBillRequest;
 import lv.javaguru.cms.rest.controllers.course.model.bill.GetBillResponse;
+import lv.javaguru.cms.rest.controllers.course.model.bill.SearchBillsRequest;
+import lv.javaguru.cms.rest.controllers.course.model.bill.SearchBillsResponse;
 import lv.javaguru.cms.rest.dto.BillDTO;
 import lv.javaguru.cms.services.course.bills.CreateBillService;
 import lv.javaguru.cms.services.course.bills.GetBillService;
+import lv.javaguru.cms.services.course.bills.SearchBillsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +25,7 @@ public class BillController {
 
     @Autowired private CreateBillService createBillService;
     @Autowired private GetBillService getBillService;
+    @Autowired private SearchBillsService searchBillsService;
 
     @PostMapping(path = "/bill", consumes = "application/json", produces = "application/json")
     public CreateBillResponse createBill(@Valid @RequestBody CreateBillRequest request,
@@ -36,6 +40,12 @@ public class BillController {
         request.setSystemUserLogin(principal.getName());
         BillDTO bill = getBillService.get(request);
         return GetBillResponse.builder().bill(bill).build();
+    }
+
+    @PostMapping(path = "/bill/search", consumes = "application/json", produces = "application/json")
+    public SearchBillsResponse search(@Valid @RequestBody SearchBillsRequest request, Principal principal) {
+        request.setSystemUserLogin(principal.getName());
+        return searchBillsService.search(request);
     }
 
 }
