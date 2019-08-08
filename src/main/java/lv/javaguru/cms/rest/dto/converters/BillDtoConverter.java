@@ -24,6 +24,7 @@ public class BillDtoConverter {
                 .billPart(entity.getBillPart())
                 .billSum(entity.getBillSum())
                 .payTo(convert(entity.getPayTo()))
+                .billStatus(entity.getStatus())
                 .build();
         dto.setId(entity.getId());
         dto.setCreatedAt(convert(entity.getCreatedAt()));

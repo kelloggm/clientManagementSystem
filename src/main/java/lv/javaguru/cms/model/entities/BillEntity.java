@@ -6,9 +6,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lv.javaguru.cms.model.entities.enums.BillStatus;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -50,5 +53,9 @@ public class BillEntity extends BaseEntity {
 
     @Column(name = "bill_sum", nullable = false)
     private Integer billSum;
+
+    @Column(name = "bill_status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BillStatus status;
 
 }

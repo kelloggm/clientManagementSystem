@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lv.javaguru.cms.model.entities.enums.BillStatus;
 
 @Data
 @Builder
@@ -23,5 +24,6 @@ public class BillDTO extends BaseDTO {
     private Integer billPart;
     private String payTo;
     private Integer billSum;
+    private BillStatus billStatus;
 
 }

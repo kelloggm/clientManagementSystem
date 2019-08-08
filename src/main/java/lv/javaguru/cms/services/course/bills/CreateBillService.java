@@ -4,6 +4,7 @@ import lv.javaguru.cms.model.entities.BillEntity;
 import lv.javaguru.cms.model.entities.CompanyEntity;
 import lv.javaguru.cms.model.entities.CourseEntity;
 import lv.javaguru.cms.model.entities.CourseParticipantEntity;
+import lv.javaguru.cms.model.entities.enums.BillStatus;
 import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.repositories.BillRepository;
 import lv.javaguru.cms.model.repositories.CompanyRepository;
@@ -104,6 +105,7 @@ public class CreateBillService {
                 .billPart(billPart)
                 .payTo(LocalDateTime.now().plusDays(validDays))
                 .billSum(courseParticipant.getOneBillAmount())
+                .status(BillStatus.ACTIVE)
                 .build();
     }
 
