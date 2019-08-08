@@ -6,25 +6,31 @@ import lv.javaguru.cms.rest.controllers.course.model.bill.GetBillRequest;
 import lv.javaguru.cms.rest.controllers.course.model.bill.GetBillResponse;
 import lv.javaguru.cms.rest.controllers.course.model.bill.SearchBillsRequest;
 import lv.javaguru.cms.rest.controllers.course.model.bill.SearchBillsResponse;
+import lv.javaguru.cms.rest.controllers.course.model.bill.UpdateBillRequest;
+import lv.javaguru.cms.rest.controllers.course.model.bill.UpdateBillResponse;
 import lv.javaguru.cms.rest.dto.BillDTO;
 import lv.javaguru.cms.services.course.bills.CreateBillService;
 import lv.javaguru.cms.services.course.bills.GetBillService;
 import lv.javaguru.cms.services.course.bills.SearchBillsService;
+import lv.javaguru.cms.services.course.bills.UpdateBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Objects;
 
 @RestController
 public class BillController {
 
     @Autowired private CreateBillService createBillService;
     @Autowired private GetBillService getBillService;
+    @Autowired private UpdateBillService updateBillService;
     @Autowired private SearchBillsService searchBillsService;
 
     @PostMapping(path = "/bill", consumes = "application/json", produces = "application/json")
@@ -40,6 +46,18 @@ public class BillController {
         request.setSystemUserLogin(principal.getName());
         BillDTO bill = getBillService.get(request);
         return GetBillResponse.builder().bill(bill).build();
+    }
+
+    @PutMapping(path = "/bill/{billId}", consumes = "application/json", produces = "application/json")
+    public UpdateBillResponse update(@PathVariable("billId") Long billId,
+                                     @Valid @RequestBody UpdateBillRequest request,
+                                     Principal principal) {
+        if (!Objects.equals(billId, request.getBillId())) {
+            throw new IllegalArgumentException("billId");
+        }
+        request.setSystemUserLogin(principal.getName());
+        BillDTO bill = updateBillService.update(request);
+        return UpdateBillResponse.builder().bill(bill).build();
     }
 
     @PostMapping(path = "/bill/search", consumes = "application/json", produces = "application/json")
