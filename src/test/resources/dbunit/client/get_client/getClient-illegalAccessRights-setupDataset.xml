@@ -3,12 +3,12 @@
     <system_user id="1000"
                  first_name="paymentManagerFirstName"
                  last_name="paymentManagerLastName"
-                 system_login="payment_manager"
+                 system_login="bill_manager"
                  system_password="$2a$10$FdTumCzNUsJGQYgY3ZiOweEelhuJshSbeBcjmvsXRRv7H4vtYqOy."
     />
 
     <system_user_role id="1000"
                       system_user_id="1000"
-                      system_user_role="PAYMENT_MANAGER"
+                      system_user_role="BILL_MANAGER"
     />
 </dataset>

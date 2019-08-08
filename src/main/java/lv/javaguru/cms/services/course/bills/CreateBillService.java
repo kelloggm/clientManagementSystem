@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 @Transactional
-public class CreateCourseParticipantBillService {
+public class CreateBillService {
 
     @Value("${bill.validDays:10}")
     public Integer validDays;
@@ -37,7 +37,7 @@ public class CreateCourseParticipantBillService {
     @Autowired private BillRepository billRepository;
 
     public CreateBillResponse create(CreateBillRequest request) {
-        rightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.CLIENT_MANAGER);
+        rightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.BILL_MANAGER);
         CompanyEntity company = companyRepository.getById(request.getCompanyId());
         CourseEntity course = courseRepository.getById(request.getCourseId());
         CourseParticipantEntity courseParticipant = courseParticipantRepository.getById(request.getParticipantId());

@@ -42,9 +42,6 @@ public abstract class RestIntegrationTest {
     protected static final String BILL_MANAGER_LOGIN = "bill_manager";
     protected static final String BILL_MANAGER_PASSWORD = "password";
 
-    protected static final String PAYMENT_MANAGER_LOGIN = "payment_manager";
-    protected static final String PAYMENT_MANAGER_PASSWORD = "password";
-
 
     @Before
     public void setUp() throws SQLException {

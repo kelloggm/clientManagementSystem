@@ -82,12 +82,12 @@ public class GetClientIntegrationTest extends RestIntegrationTest {
     @ExpectedDatabase(value = "classpath:dbunit/client/get_client/getClient-illegalAccessRights-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnSecurityErrorWhenSystemUserNotHaveAccessRights() {
-        GetClientResponse response = sendRequest(PAYMENT_MANAGER_LOGIN, PAYMENT_MANAGER_PASSWORD, 1L);
+        GetClientResponse response = sendRequest(BILL_MANAGER_LOGIN, BILL_MANAGER_PASSWORD, 1L);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), is(CmsErrorCategory.WORKFLOW));
         assertThat(response.getErrors().get(0).getCode(), is(CmsErrorCode.UNAUTHORIZED));
-        assertThat(response.getErrors().get(0).getDescription(), is("user = payment_manager must have role one of ADMIN,CLIENT_MANAGER"));
+        assertThat(response.getErrors().get(0).getDescription(), is("user = bill_manager must have role one of ADMIN,CLIENT_MANAGER"));
     }
 
     private GetClientResponse sendRequest(String userName,

@@ -53,12 +53,12 @@ public class GetSystemUserIntegrationTest extends RestIntegrationTest {
     @ExpectedDatabase(value = "classpath:dbunit/system_user/get_system_user/getSystemUser-illegalAccessRights-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnSecurityErrorWhenSystemUserNotHaveAccessRights() {
-        GetSystemUserResponse response = sendRequest(PAYMENT_MANAGER_LOGIN, PAYMENT_MANAGER_PASSWORD, 1L);
+        GetSystemUserResponse response = sendRequest(BILL_MANAGER_LOGIN, BILL_MANAGER_PASSWORD, 1L);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), is(CmsErrorCategory.WORKFLOW));
         assertThat(response.getErrors().get(0).getCode(), is(CmsErrorCode.UNAUTHORIZED));
-        assertThat(response.getErrors().get(0).getDescription(), is("user = payment_manager must have role one of ADMIN"));
+        assertThat(response.getErrors().get(0).getDescription(), is("user = bill_manager must have role one of ADMIN"));
     }
 
     private GetSystemUserResponse sendRequest(String userName,
