@@ -8,14 +8,17 @@ import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesRequest;
 import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesResponse;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseResponse;
+import lv.javaguru.cms.rest.controllers.course.model.bill.GetCourseBillsRequest;
+import lv.javaguru.cms.rest.controllers.course.model.bill.GetCourseBillsResponse;
 import lv.javaguru.cms.rest.controllers.course.model.participant.GetCourseParticipantsRequest;
 import lv.javaguru.cms.rest.controllers.course.model.participant.GetCourseParticipantsResponse;
 import lv.javaguru.cms.rest.dto.CourseDTO;
 import lv.javaguru.cms.services.course.CreateCourseService;
-import lv.javaguru.cms.services.course.participants.GetCourseParticipantsService;
 import lv.javaguru.cms.services.course.GetCourseService;
 import lv.javaguru.cms.services.course.SearchCoursesService;
 import lv.javaguru.cms.services.course.UpdateCourseService;
+import lv.javaguru.cms.services.course.bills.GetCourseBillsService;
+import lv.javaguru.cms.services.course.participants.GetCourseParticipantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +39,7 @@ public class CourseController {
     @Autowired private UpdateCourseService updateCourseService;
     @Autowired private SearchCoursesService searchCoursesService;
     @Autowired private GetCourseParticipantsService getCourseParticipantsService;
+    @Autowired private GetCourseBillsService getCourseBillsService;
 
     @PostMapping(path = "/course", consumes = "application/json", produces = "application/json")
     public CreateCourseResponse register(@Valid @RequestBody CreateCourseRequest request, Principal principal) {
@@ -76,6 +80,14 @@ public class CourseController {
         GetCourseParticipantsRequest request = GetCourseParticipantsRequest.builder().courseId(courseId).build();
         request.setSystemUserLogin(principal.getName());
         return getCourseParticipantsService.get(request);
+    }
+
+    @GetMapping(path = "/course/{courseId}/bills", produces = "application/json")
+    public GetCourseBillsResponse getBills(@PathVariable("courseId") Long courseId,
+                                           Principal principal) {
+        GetCourseBillsRequest request = GetCourseBillsRequest.builder().courseId(courseId).build();
+        request.setSystemUserLogin(principal.getName());
+        return getCourseBillsService.get(request);
     }
 
 }

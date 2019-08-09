@@ -6,6 +6,7 @@ import lv.javaguru.cms.model.entities.CourseParticipantEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BillRepository extends JpaRepository<BillEntity, Long>,
@@ -22,5 +23,7 @@ public interface BillRepository extends JpaRepository<BillEntity, Long>,
 
 
     Optional<BillEntity> findFirstByBillPrefixOrderByBillNumberDesc(String billPrefix);
+
+    List<BillEntity> findByCourseOrderByBillPartAsc(CourseEntity course);
 
 }
