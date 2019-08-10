@@ -17,10 +17,10 @@ import java.io.IOException;
 public class PvnBillGenerationService {
 
     @Value("${bill.templates.pvn}")
-    public String billTemplatesMicro;
+    public String billTemplatesPvn;
 
-    @Value("${bill.storage.pvn}")
-    public String billStorageMicro;
+    @Value("${bill.storage}")
+    public String billStorage;
 
     @Autowired
     private TextReplacementService textReplacementService;
@@ -67,11 +67,11 @@ public class PvnBillGenerationService {
     }
 
     private String getNewBillFilePath(String billNumber) {
-        return billStorageMicro + "\\" + billNumber + ".docx";
+        return billStorage + "\\" + billNumber + ".docx";
     }
 
     private Resource loadBillTemplate() {
-        return new ClassPathResource(billTemplatesMicro);
+        return new ClassPathResource(billTemplatesPvn);
     }
 
 }

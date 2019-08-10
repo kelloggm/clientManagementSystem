@@ -14,6 +14,7 @@ public class GenerateBillServiceTest extends RestIntegrationTest {
     @Test
     public void shouldGenerateNewBill() {
         BillParameters billParameters = BillParameters.builder()
+            .billPrefix("JA1-2019")
             .billNumber("JA1-2019-121")
             .billCreationDate("23.08.2019")
             .companyTitle("JavaGuruLV")
@@ -28,7 +29,7 @@ public class GenerateBillServiceTest extends RestIntegrationTest {
             .courseEndDate("31.08.2019")
             .courseAddress("Rīga, Skolas iela 21, 508c kabinets")
             .billPrice("120.00")
-            .billPart("1")
+            .billPart("2")
             .billPartTotal("3")
             .companyMemberOfTheBoard("Viktors Savoņins")
             .build();

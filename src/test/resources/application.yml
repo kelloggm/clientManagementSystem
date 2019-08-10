@@ -35,9 +35,7 @@ logging:
 
 bill:
   validDays: 10
-  storage:
-    micro: C:\work\projects\JavaGuruLV\Client_Management_System\src\test\resources\bill_storage\micro
-    pvn: C:\work\projects\JavaGuruLV\Client_Management_System\src\test\resources\bill_storage\pvn
+  storage: C:\work\projects\JavaGuruLV\Client_Management_System\src\test\resources\bill_storage
   templates:
     micro: bill_templates/microBillTemplate.docx
     pvn: bill_templates/pvnBillTemplate.docx

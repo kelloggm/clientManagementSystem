@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class BillParameters {
 
+    private String billPrefix;
     private String billNumber;
     private String billCreationDate;
     private String companyTitle;

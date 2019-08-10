@@ -119,6 +119,7 @@ public class CreateBillService {
                                                  Integer billPart) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM.dd.yyyy");
         return BillParameters.builder()
+                .billPrefix(course.getBillPrefix())
                 .billNumber(course.getBillPrefix() + "-" + billNumber)
                 .billCreationDate(LocalDate.now().format(dateFormatter))
                 .companyTitle(company.getTitle())

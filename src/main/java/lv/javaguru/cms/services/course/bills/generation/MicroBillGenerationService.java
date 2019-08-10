@@ -45,7 +45,7 @@ public class MicroBillGenerationService {
             textReplacementService.replace(document, "{company_title_2}", billParameters.getCompanyTitle());
             textReplacementService.replace(document, "{company_member_of_the_board}", billParameters.getCompanyMemberOfTheBoard());
 
-            billStorageService.saveNewBill(billParameters, document);
+            billStorageService.storeNewBill(billParameters, document);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
