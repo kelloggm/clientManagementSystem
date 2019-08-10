@@ -17,6 +17,8 @@ public interface CourseParticipantRepository
 
     List<CourseParticipantEntity> findByCourse(CourseEntity course);
 
+    List<CourseParticipantEntity> findByClient(ClientEntity client);
+
     default CourseParticipantEntity getById(Long participantId) {
         return findById(participantId)
                 .orElseThrow(() -> new IllegalArgumentException("participantId"));

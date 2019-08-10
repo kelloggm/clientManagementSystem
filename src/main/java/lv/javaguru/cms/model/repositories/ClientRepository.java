@@ -11,6 +11,11 @@ public interface ClientRepository
         extends JpaRepository<ClientEntity, Long>,
                 JpaSpecificationExecutor<ClientEntity> {
 
+    default ClientEntity getById(Long clientId) {
+        return findById(clientId)
+                .orElseThrow(() -> new IllegalArgumentException("clientId"));
+    }
+
     Optional<ClientEntity> findByFirstNameAndLastNameAndPhoneNumberAndEmail(
             @Param("firstName") String firstName,
             @Param("lastName") String lastName,

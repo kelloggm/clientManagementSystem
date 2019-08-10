@@ -1,16 +1,19 @@
 package lv.javaguru.cms.rest.controllers.client;
 
 import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationRequest;
+import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationResponse;
+import lv.javaguru.cms.rest.controllers.client.model.GetClientBillsRequest;
+import lv.javaguru.cms.rest.controllers.client.model.GetClientBillsResponse;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientRequest;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientResponse;
-import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationResponse;
 import lv.javaguru.cms.rest.controllers.client.model.SearchClientsRequest;
 import lv.javaguru.cms.rest.controllers.client.model.SearchClientsResponse;
 import lv.javaguru.cms.rest.controllers.client.model.UpdateClientRequest;
 import lv.javaguru.cms.rest.controllers.client.model.UpdateClientResponse;
 import lv.javaguru.cms.rest.dto.ClientDTO;
-import lv.javaguru.cms.services.client.GetClientService;
 import lv.javaguru.cms.services.client.ClientRegistrationService;
+import lv.javaguru.cms.services.client.GetClientBillsService;
+import lv.javaguru.cms.services.client.GetClientService;
 import lv.javaguru.cms.services.client.SearchClientsService;
 import lv.javaguru.cms.services.client.UpdateClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,7 @@ public class ClientController {
 
     @Autowired private ClientRegistrationService registerClientService;
     @Autowired private GetClientService getClientService;
+    @Autowired private GetClientBillsService getClientBillsService;
     @Autowired private UpdateClientService updateClientService;
     @Autowired private SearchClientsService searchClientsService;
 
@@ -46,6 +50,13 @@ public class ClientController {
         request.setSystemUserLogin(principal.getName());
         ClientDTO client = getClientService.get(request);
         return GetClientResponse.builder().client(client).build();
+    }
+
+    @GetMapping(path = "/client/{clientId}/bills", produces = "application/json")
+    public GetClientBillsResponse getBills(@PathVariable("clientId") Long clientId, Principal principal) {
+        GetClientBillsRequest request = GetClientBillsRequest.builder().clientId(clientId).build();
+        request.setSystemUserLogin(principal.getName());
+        return getClientBillsService.get(request);
     }
 
     @PutMapping(path = "/client/{clientId}", consumes = "application/json", produces = "application/json")

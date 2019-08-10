@@ -26,4 +26,6 @@ public interface BillRepository extends JpaRepository<BillEntity, Long>,
 
     List<BillEntity> findByCourseOrderByBillPartAsc(CourseEntity course);
 
+    List<BillEntity> findByCourseParticipant(CourseParticipantEntity courseParticipant);
+
 }
