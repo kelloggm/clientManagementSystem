@@ -4,6 +4,8 @@ import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationRequest;
 import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationResponse;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientBillsRequest;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientBillsResponse;
+import lv.javaguru.cms.rest.controllers.client.model.GetClientCoursesRequest;
+import lv.javaguru.cms.rest.controllers.client.model.GetClientCoursesResponse;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientRequest;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientResponse;
 import lv.javaguru.cms.rest.controllers.client.model.SearchClientsRequest;
@@ -13,6 +15,7 @@ import lv.javaguru.cms.rest.controllers.client.model.UpdateClientResponse;
 import lv.javaguru.cms.rest.dto.ClientDTO;
 import lv.javaguru.cms.services.client.ClientRegistrationService;
 import lv.javaguru.cms.services.client.GetClientBillsService;
+import lv.javaguru.cms.services.client.GetClientCoursesService;
 import lv.javaguru.cms.services.client.GetClientService;
 import lv.javaguru.cms.services.client.SearchClientsService;
 import lv.javaguru.cms.services.client.UpdateClientService;
@@ -33,6 +36,7 @@ public class ClientController {
 
     @Autowired private ClientRegistrationService registerClientService;
     @Autowired private GetClientService getClientService;
+    @Autowired private GetClientCoursesService getClientCoursesService;
     @Autowired private GetClientBillsService getClientBillsService;
     @Autowired private UpdateClientService updateClientService;
     @Autowired private SearchClientsService searchClientsService;
@@ -50,6 +54,13 @@ public class ClientController {
         request.setSystemUserLogin(principal.getName());
         ClientDTO client = getClientService.get(request);
         return GetClientResponse.builder().client(client).build();
+    }
+
+    @GetMapping(path = "/client/{clientId}/courses", produces = "application/json")
+    public GetClientCoursesResponse getCourses(@PathVariable("clientId") Long clientId, Principal principal) {
+        GetClientCoursesRequest request = GetClientCoursesRequest.builder().clientId(clientId).build();
+        request.setSystemUserLogin(principal.getName());
+        return getClientCoursesService.get(request);
     }
 
     @GetMapping(path = "/client/{clientId}/bills", produces = "application/json")
