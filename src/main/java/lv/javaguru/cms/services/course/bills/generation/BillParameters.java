@@ -1,4 +1,4 @@
-package lv.javaguru.cms.services.course.bills;
+package lv.javaguru.cms.services.course.bills.generation;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

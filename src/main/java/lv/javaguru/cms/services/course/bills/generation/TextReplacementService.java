@@ -1,4 +1,4 @@
-package lv.javaguru.cms.services.course.bills;
+package lv.javaguru.cms.services.course.bills.generation;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;

@@ -1,4 +1,4 @@
-package lv.javaguru.cms.services.course.bills;
+package lv.javaguru.cms.services.course.bills.generation;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;

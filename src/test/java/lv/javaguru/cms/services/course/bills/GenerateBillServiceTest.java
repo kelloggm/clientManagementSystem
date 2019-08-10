@@ -1,6 +1,8 @@
 package lv.javaguru.cms.services.course.bills;
 
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
+import lv.javaguru.cms.services.course.bills.generation.BillParameters;
+import lv.javaguru.cms.services.course.bills.generation.MicroBillGenerationService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
