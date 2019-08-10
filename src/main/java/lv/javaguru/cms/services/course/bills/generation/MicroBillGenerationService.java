@@ -10,7 +10,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 @Component
@@ -19,11 +18,8 @@ public class MicroBillGenerationService {
     @Value("${bill.templates.micro}")
     public String billTemplatesMicro;
 
-    @Value("${bill.storage.micro}")
-    public String billStorageMicro;
-
-    @Autowired
-    private TextReplacementService textReplacementService;
+    @Autowired private TextReplacementService textReplacementService;
+    @Autowired private BillStorageService billStorageService;
 
     public void generate(BillParameters billParameters) {
         try {
@@ -49,7 +45,7 @@ public class MicroBillGenerationService {
             textReplacementService.replace(document, "{company_title_2}", billParameters.getCompanyTitle());
             textReplacementService.replace(document, "{company_member_of_the_board}", billParameters.getCompanyMemberOfTheBoard());
 
-            saveNewBill(billParameters, document);
+            billStorageService.saveNewBill(billParameters, document);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -59,15 +55,6 @@ public class MicroBillGenerationService {
         Resource billTemplateResource = loadBillTemplate();
         File billTemplateFile = billTemplateResource.getFile();
         return new XWPFDocument(OPCPackage.open(billTemplateFile));
-    }
-
-    private void saveNewBill(BillParameters billParameters, XWPFDocument document) throws IOException {
-        String newBillFilePath = getNewBillFilePath(billParameters.getBillNumber());
-        document.write(new FileOutputStream(newBillFilePath));
-    }
-
-    private String getNewBillFilePath(String billNumber) {
-        return billStorageMicro + "\\" + billNumber + ".docx";
     }
 
     private Resource loadBillTemplate() {
