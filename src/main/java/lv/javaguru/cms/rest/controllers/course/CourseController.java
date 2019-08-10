@@ -8,6 +8,8 @@ import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesRequest;
 import lv.javaguru.cms.rest.controllers.course.model.SearchCoursesResponse;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseRequest;
 import lv.javaguru.cms.rest.controllers.course.model.UpdateCourseResponse;
+import lv.javaguru.cms.rest.controllers.course.model.bill.CreateCourseBillsRequest;
+import lv.javaguru.cms.rest.controllers.course.model.bill.CreateCourseBillsResponse;
 import lv.javaguru.cms.rest.controllers.course.model.bill.GetCourseBillsRequest;
 import lv.javaguru.cms.rest.controllers.course.model.bill.GetCourseBillsResponse;
 import lv.javaguru.cms.rest.controllers.course.model.participant.GetCourseParticipantsRequest;
@@ -17,6 +19,7 @@ import lv.javaguru.cms.services.course.CreateCourseService;
 import lv.javaguru.cms.services.course.GetCourseService;
 import lv.javaguru.cms.services.course.SearchCoursesService;
 import lv.javaguru.cms.services.course.UpdateCourseService;
+import lv.javaguru.cms.services.course.bills.CreateCourseBillsService;
 import lv.javaguru.cms.services.course.bills.GetCourseBillsService;
 import lv.javaguru.cms.services.course.participants.GetCourseParticipantsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,7 @@ public class CourseController {
     @Autowired private SearchCoursesService searchCoursesService;
     @Autowired private GetCourseParticipantsService getCourseParticipantsService;
     @Autowired private GetCourseBillsService getCourseBillsService;
+    @Autowired private CreateCourseBillsService createCourseBillsService;
 
     @PostMapping(path = "/course", consumes = "application/json", produces = "application/json")
     public CreateCourseResponse register(@Valid @RequestBody CreateCourseRequest request, Principal principal) {
@@ -88,6 +92,13 @@ public class CourseController {
         GetCourseBillsRequest request = GetCourseBillsRequest.builder().courseId(courseId).build();
         request.setSystemUserLogin(principal.getName());
         return getCourseBillsService.get(request);
+    }
+
+    @PostMapping(path = "/course/{courseId}/bills", consumes = "application/json", produces = "application/json")
+    public CreateCourseBillsResponse createBills(@Valid @RequestBody CreateCourseBillsRequest request,
+                                                Principal principal) {
+        request.setSystemUserLogin(principal.getName());
+        return createCourseBillsService.create(request);
     }
 
 }

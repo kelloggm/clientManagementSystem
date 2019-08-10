@@ -11,7 +11,8 @@ import lv.javaguru.cms.model.repositories.CompanyRepository;
 import lv.javaguru.cms.model.repositories.CourseParticipantRepository;
 import lv.javaguru.cms.model.repositories.CourseRepository;
 import lv.javaguru.cms.rest.controllers.course.model.bill.CreateBillRequest;
-import lv.javaguru.cms.rest.controllers.course.model.bill.CreateBillResponse;
+import lv.javaguru.cms.rest.dto.BillDTO;
+import lv.javaguru.cms.rest.dto.converters.BillDtoConverter;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import lv.javaguru.cms.services.course.bills.generation.BillParameters;
 import lv.javaguru.cms.services.course.bills.generation.MicroBillGenerationService;
@@ -39,8 +40,9 @@ public class CreateBillService {
     @Autowired private MicroBillGenerationService microBillGenerationService;
     @Autowired private PvnBillGenerationService pvnBillGenerationService;
     @Autowired private BillRepository billRepository;
+    @Autowired private BillDtoConverter billDtoConverter;
 
-    public CreateBillResponse create(CreateBillRequest request) {
+    public BillDTO create(CreateBillRequest request) {
         rightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN, SystemUserRole.BILL_MANAGER);
         CompanyEntity company = companyRepository.getById(request.getCompanyId());
         CourseEntity course = courseRepository.getById(request.getCourseId());
@@ -51,7 +53,7 @@ public class CreateBillService {
                 .map(b -> regenerateAlreadyExistingBill(request, course, courseParticipant, company, b))
                 .orElseGet(() -> generateNewBill(request, course, courseParticipant, company));
 
-        return CreateBillResponse.builder().billId(bill.getId()).build();
+        return billDtoConverter.convert(bill);
     }
 
     private void checkParticipantRegistrationToCourse(CourseEntity course, CourseParticipantEntity courseParticipant) {

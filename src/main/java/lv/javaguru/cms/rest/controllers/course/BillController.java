@@ -42,7 +42,8 @@ public class BillController {
     public CreateBillResponse createBill(@Valid @RequestBody CreateBillRequest request,
                                          Principal principal) {
         request.setSystemUserLogin(principal.getName());
-        return createBillService.create(request);
+        BillDTO bill = createBillService.create(request);
+        return CreateBillResponse.builder().billId(bill.getId()).build();
     }
 
     @GetMapping(path = "/bill/{billId}", produces = "application/json")
