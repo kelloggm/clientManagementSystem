@@ -2,24 +2,25 @@ package lv.javaguru.cms.services.course.bills;
 
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
 import lv.javaguru.cms.services.course.bills.generation.BillParameters;
-import lv.javaguru.cms.services.course.bills.generation.MicroBillGenerationService;
+import lv.javaguru.cms.services.course.bills.generation.PvnBillGenerationService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class GenerateBillServiceTest extends RestIntegrationTest {
+public class PvnBillGenerationServiceTest extends RestIntegrationTest {
 
     @Autowired
-    private MicroBillGenerationService service;
+    private PvnBillGenerationService service;
 
     @Test
     public void shouldGenerateNewBill() {
         BillParameters billParameters = BillParameters.builder()
             .billPrefix("JA1-2019")
-            .billNumber("JA1-2019-121")
+            .billNumber("JA1-2019-122")
             .billCreationDate("23.08.2019")
-            .companyTitle("JavaGuruLV")
+            .companyTitle("ITGuru Software Development")
             .companyAddress("S.Eizenšteina 59-12, Rīga, LV-1079")
             .companyBankName("Swedbank")
+            .companyBankBicSwift("HABALV22")
             .companyBankAccount("LV46HABA0551043273217")
             .companyRegistrationNumber("40203054690")
             .courseParticipant("Jānis Aldiņš")
@@ -29,6 +30,8 @@ public class GenerateBillServiceTest extends RestIntegrationTest {
             .courseEndDate("31.08.2019")
             .courseAddress("Rīga, Skolas iela 21, 508c kabinets")
             .billPrice("120.00")
+            .billPriceWithoutPvn("66.12")
+            .pvn("12.37")
             .billPart("2")
             .billPartTotal("3")
             .companyMemberOfTheBoard("Viktors Savoņins")

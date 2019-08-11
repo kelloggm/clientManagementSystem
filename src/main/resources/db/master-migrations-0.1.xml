@@ -162,6 +162,9 @@
             <column name="bank_name" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
+            <column name="bank_bic_swift" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
             <column name="bank_account" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>

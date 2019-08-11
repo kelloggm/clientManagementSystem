@@ -34,6 +34,9 @@ public class UpdateCompanyRequest extends BaseRequest {
     private String bankName;
 
     @NotNull
+    private String bankBicSwift;
+
+    @NotNull
     private String bankAccount;
 
     @NotNull

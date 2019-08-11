@@ -33,6 +33,9 @@ public class CompanyEntity extends BaseEntity {
     @Column(name = "bank_name", nullable = false)
     private String bankName;
 
+    @Column(name = "bank_bic_swift", nullable = false)
+    private String bankBicSwift;
+
     @Column(name = "bank_account", nullable = false)
     private String bankAccount;
 

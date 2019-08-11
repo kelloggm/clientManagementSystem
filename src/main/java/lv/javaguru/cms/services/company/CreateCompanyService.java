@@ -33,6 +33,7 @@ public class CreateCompanyService {
                 .registrationNumber(request.getRegistrationNumber())
                 .legalAddress(request.getLegalAddress())
                 .bankName(request.getBankName())
+                .bankBicSwift(request.getBankBicSwift())
                 .bankAccount(request.getBankAccount())
                 .memberOfTheBoard(request.getMemberOfTheBoard())
                 .pvnPayer(request.getPvnPayer())

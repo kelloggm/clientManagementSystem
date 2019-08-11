@@ -19,6 +19,7 @@ public class CompanyDTO extends BaseDTO {
     private String registrationNumber;
     private String legalAddress;
     private String bankName;
+    private String bankBicSwift;
     private String bankAccount;
     private String memberOfTheBoard;
     private Boolean pvnPayer;

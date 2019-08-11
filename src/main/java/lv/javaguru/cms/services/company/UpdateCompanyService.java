@@ -31,6 +31,7 @@ public class UpdateCompanyService {
         company.setRegistrationNumber(request.getRegistrationNumber());
         company.setLegalAddress(request.getLegalAddress());
         company.setBankName(request.getBankName());
+        company.setBankBicSwift(request.getBankBicSwift());
         company.setBankAccount(request.getBankAccount());
         company.setMemberOfTheBoard(request.getMemberOfTheBoard());
         company.setPvnPayer(request.getPvnPayer());

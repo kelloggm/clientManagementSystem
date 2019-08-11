@@ -19,6 +19,7 @@ public class BillParameters {
     private String companyTitle;
     private String companyAddress;
     private String companyBankName;
+    private String companyBankBicSwift;
     private String companyBankAccount;
     private String companyRegistrationNumber;
     private String courseParticipant;
@@ -28,6 +29,8 @@ public class BillParameters {
     private String courseEndDate;
     private String courseAddress;
     private String billPrice;
+    private String billPriceWithoutPvn;
+    private String pvn;
     private String billPart;
     private String billPartTotal;
     private String companyMemberOfTheBoard;

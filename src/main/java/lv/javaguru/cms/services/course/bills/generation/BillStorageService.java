@@ -84,7 +84,7 @@ public class BillStorageService {
                         + "\\"
                         + currentYear
                         + "\\"
-                        + billParameters.getCourseTitle()
+                        + billParameters.getCourseTitle() + " (" + billParameters.getCourseStartDate().replaceAll("\\.", "_") + " - " + billParameters.getCourseEndDate().replaceAll("\\.", "_") + ")"
         );
         if (!courseDirectory.exists()) {
             courseDirectory.mkdirs();
@@ -97,9 +97,9 @@ public class BillStorageService {
                         + "\\"
                         + currentYear
                         + "\\"
-                        + billParameters.getCourseTitle()
+                        + billParameters.getCourseTitle() + " (" + billParameters.getCourseStartDate().replaceAll("\\.", "_") + " - " + billParameters.getCourseEndDate().replaceAll("\\.", "_") + ")"
                         + "\\"
-                        + billParameters.getBillPart()
+                        + "part " + billParameters.getBillPart() + " of " + billParameters.getBillPartTotal()
         );
         if (!billPartDirectory.exists()) {
             billPartDirectory.mkdirs();
@@ -111,9 +111,9 @@ public class BillStorageService {
                 + "\\"
                 + currentYear
                 + "\\"
-                + billParameters.getCourseTitle()
+                + billParameters.getCourseTitle() + " (" + billParameters.getCourseStartDate().replaceAll("\\.", "_") + " - " + billParameters.getCourseEndDate().replaceAll("\\.", "_") + ")"
                 + "\\"
-                + billParameters.getBillPart()
+                + "part " + billParameters.getBillPart() + " of " + billParameters.getBillPartTotal()
                 + "\\"
                 + billParameters.getBillNumber() + ".docx";
     }

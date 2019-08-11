@@ -15,6 +15,7 @@ public class CompanyDtoConverter {
                 .registrationNumber(entity.getRegistrationNumber())
                 .legalAddress(entity.getLegalAddress())
                 .bankName(entity.getBankName())
+                .bankBicSwift(entity.getBankBicSwift())
                 .bankAccount(entity.getBankAccount())
                 .memberOfTheBoard(entity.getMemberOfTheBoard())
                 .pvnPayer(entity.isPvnPayer())

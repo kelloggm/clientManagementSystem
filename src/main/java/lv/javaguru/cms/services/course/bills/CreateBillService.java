@@ -127,6 +127,7 @@ public class CreateBillService {
                 .companyTitle(company.getTitle())
                 .companyAddress(company.getLegalAddress())
                 .companyBankName(company.getBankName())
+                .companyBankBicSwift(company.getBankBicSwift())
                 .companyBankAccount(company.getBankAccount())
                 .companyRegistrationNumber(company.getRegistrationNumber())
                 .courseParticipant(courseParticipant.getClient().getFirstName() + courseParticipant.getClient().getLastName())
@@ -136,10 +137,30 @@ public class CreateBillService {
                 .courseEndDate(course.getEndDate().format(dateFormatter))
                 .courseAddress(course.getAddress())
                 .billPrice(courseParticipant.getOneBillAmount().toString() + ".00")
+                .billPriceWithoutPvn(getPriceWithoutPvn(company, courseParticipant.getOneBillAmount()))
+                .pvn(getPvn(company, courseParticipant.getOneBillAmount()))
                 .billPart(billPart.toString())
                 .billPartTotal(courseParticipant.getBillCount().toString())
                 .companyMemberOfTheBoard(company.getMemberOfTheBoard())
                 .build();
+    }
+
+    private String getPriceWithoutPvn(CompanyEntity company, Integer billPrice) {
+        if (company.isPvnPayer()) {
+            double withoutPvn = (double)billPrice / 1.21;
+            return String.format("%.2f", withoutPvn);
+        } else {
+            return billPrice.toString() + ".00";
+        }
+    }
+
+    private String getPvn(CompanyEntity company, Integer billPrice) {
+        if (company.isPvnPayer()) {
+            double pvn = (double)billPrice - (billPrice / 1.21);
+            return String.format("%.2f", pvn);
+        } else {
+            return "0.00";
+        }
     }
 
 }
