@@ -5,7 +5,7 @@ import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.entities.SystemUserRoleEntity;
 import lv.javaguru.cms.model.repositories.SystemUserRepository;
 import lv.javaguru.cms.model.repositories.SystemUserRoleRepository;
-import lv.javaguru.cms.rest.controllers.systemuser.model.SystemUserRegistrationRequest;
+import lv.javaguru.cms.rest.controllers.systemuser.model.CreateSystemUserRequest;
 import lv.javaguru.cms.services.SystemUserRightsChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,14 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Transactional
-public class SystemUserRegistrationService {
+public class CreateSystemUserService {
 
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private SystemUserRightsChecker systemUserRightsChecker;
     @Autowired private SystemUserRepository systemUserRepository;
     @Autowired private SystemUserRoleRepository systemUserRoleRepository;
 
-    public SystemUserEntity register(SystemUserRegistrationRequest request) {
+    public SystemUserEntity register(CreateSystemUserRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN);
         checkIfSystemUserWithSameLoginAlreadyExist(request);
 
@@ -43,7 +43,7 @@ public class SystemUserRegistrationService {
         return systemUser;
     }
 
-    private void checkIfSystemUserWithSameLoginAlreadyExist(SystemUserRegistrationRequest request) {
+    private void checkIfSystemUserWithSameLoginAlreadyExist(CreateSystemUserRequest request) {
         systemUserRepository.findByLogin(request.getLogin()).ifPresent(
                 systemUserEntity -> {
                     throw new IllegalArgumentException("login");

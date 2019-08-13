@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class SystemUserRegistrationRequest extends BaseRequest {
+public class CreateSystemUserRequest extends BaseRequest {
 
     @NotNull
     private String firstName;

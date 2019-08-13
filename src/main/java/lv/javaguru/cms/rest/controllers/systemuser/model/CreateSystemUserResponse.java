@@ -14,7 +14,7 @@ import lv.javaguru.cms.rest.BaseResponse;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class SystemUserRegistrationResponse extends BaseResponse {
+public class CreateSystemUserResponse extends BaseResponse {
 
     private Long systemUserId;
 
