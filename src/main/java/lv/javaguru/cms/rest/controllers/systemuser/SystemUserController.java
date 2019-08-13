@@ -25,8 +25,7 @@ public class SystemUserController {
     @Autowired private GetSystemUserService getSystemUserService;
 
     @PostMapping(path = "/system_user", consumes = "application/json", produces = "application/json")
-    public CreateSystemUserResponse register(@Valid @RequestBody CreateSystemUserRequest request,
-                                             Principal principal) {
+    public CreateSystemUserResponse create(@Valid @RequestBody CreateSystemUserRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         SystemUserEntity systemUser = createSystemUserService.register(request);
         return CreateSystemUserResponse.builder().systemUserId(systemUser.getId()).build();
