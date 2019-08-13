@@ -15,5 +15,9 @@ public interface SystemUserRepository extends JpaRepository<SystemUserEntity, Lo
                         "unable to find SystemUserEntity by login = " + login));
     }
 
+    default SystemUserEntity getById(Long systemUserId) {
+        return findById(systemUserId)
+                .orElseThrow(() -> new IllegalArgumentException("systemUserId"));
+    }
 
 }

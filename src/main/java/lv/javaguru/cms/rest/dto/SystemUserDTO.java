@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lv.javaguru.cms.model.entities.enums.SystemUserRole;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -18,5 +21,6 @@ public class SystemUserDTO extends BaseDTO {
     private String firstName;
     private String lastName;
     private String login;
+    private List<SystemUserRole> roles;
 
 }

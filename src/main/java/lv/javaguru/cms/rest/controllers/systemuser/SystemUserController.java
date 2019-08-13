@@ -6,8 +6,8 @@ import lv.javaguru.cms.rest.controllers.systemuser.model.CreateSystemUserRespons
 import lv.javaguru.cms.rest.controllers.systemuser.model.GetSystemUserRequest;
 import lv.javaguru.cms.rest.controllers.systemuser.model.GetSystemUserResponse;
 import lv.javaguru.cms.rest.dto.SystemUserDTO;
-import lv.javaguru.cms.services.systemuser.GetSystemUserService;
 import lv.javaguru.cms.services.systemuser.CreateSystemUserService;
+import lv.javaguru.cms.services.systemuser.GetSystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +23,8 @@ public class SystemUserController {
 
     @Autowired private CreateSystemUserService createSystemUserService;
     @Autowired private GetSystemUserService getSystemUserService;
+
+    // login
 
     @PostMapping(path = "/system_user", consumes = "application/json", produces = "application/json")
     public CreateSystemUserResponse create(@Valid @RequestBody CreateSystemUserRequest request, Principal principal) {
