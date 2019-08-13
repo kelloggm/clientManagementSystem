@@ -1,7 +1,7 @@
 package lv.javaguru.cms.rest.controllers.client;
 
-import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationRequest;
-import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationResponse;
+import lv.javaguru.cms.rest.controllers.client.model.CreateClientRequest;
+import lv.javaguru.cms.rest.controllers.client.model.CreateClientResponse;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientBillsRequest;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientBillsResponse;
 import lv.javaguru.cms.rest.controllers.client.model.GetClientCoursesRequest;
@@ -13,7 +13,7 @@ import lv.javaguru.cms.rest.controllers.client.model.SearchClientsResponse;
 import lv.javaguru.cms.rest.controllers.client.model.UpdateClientRequest;
 import lv.javaguru.cms.rest.controllers.client.model.UpdateClientResponse;
 import lv.javaguru.cms.rest.dto.ClientDTO;
-import lv.javaguru.cms.services.client.ClientRegistrationService;
+import lv.javaguru.cms.services.client.CreateClientService;
 import lv.javaguru.cms.services.client.GetClientBillsService;
 import lv.javaguru.cms.services.client.GetClientCoursesService;
 import lv.javaguru.cms.services.client.GetClientService;
@@ -34,7 +34,7 @@ import java.util.Objects;
 @RestController
 public class ClientController {
 
-    @Autowired private ClientRegistrationService registerClientService;
+    @Autowired private CreateClientService createClientService;
     @Autowired private GetClientService getClientService;
     @Autowired private GetClientCoursesService getClientCoursesService;
     @Autowired private GetClientBillsService getClientBillsService;
@@ -42,10 +42,10 @@ public class ClientController {
     @Autowired private SearchClientsService searchClientsService;
 
     @PostMapping(path = "/client", consumes = "application/json", produces = "application/json")
-    public ClientRegistrationResponse register(@Valid @RequestBody ClientRegistrationRequest request, Principal principal) {
+    public CreateClientResponse register(@Valid @RequestBody CreateClientRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
-        ClientDTO client = registerClientService.register(request);
-        return ClientRegistrationResponse.builder().clientId(client.getId()).build();
+        ClientDTO client = createClientService.register(request);
+        return CreateClientResponse.builder().clientId(client.getId()).build();
     }
 
     @GetMapping(path = "/client/{clientId}", produces = "application/json")

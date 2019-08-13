@@ -5,8 +5,8 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import lv.javaguru.cms.rest.CmsErrorCategory;
 import lv.javaguru.cms.rest.CmsErrorCode;
-import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationRequest;
-import lv.javaguru.cms.rest.controllers.client.model.ClientRegistrationResponse;
+import lv.javaguru.cms.rest.controllers.client.model.CreateClientRequest;
+import lv.javaguru.cms.rest.controllers.client.model.CreateClientResponse;
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -18,40 +18,40 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-public class ClientRegistrationIntegrationTest extends RestIntegrationTest {
+public class CreateClientIntegrationTest extends RestIntegrationTest {
 
     @Test
-    @DatabaseSetup(value = "classpath:dbunit/client/register_client/registerClient-ClientManager-setupDataset.xml")
-    @ExpectedDatabase(value = "classpath:dbunit/client/register_client/registerClient-ClientManager-expectedDataset.xml", assertionMode= NON_STRICT)
+    @DatabaseSetup(value = "classpath:dbunit/client/create_client/createClient-ClientManager-setupDataset.xml")
+    @ExpectedDatabase(value = "classpath:dbunit/client/create_client/createClient-ClientManager-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
-    public void shouldRegisterClientWithClientManagerRole() {
-        ClientRegistrationRequest request = buildRequest();
-        ClientRegistrationResponse response = sendRequest(CLIENT_MANAGER_LOGIN, CLIENT_MANAGER_PASSWORD, request);
+    public void shouldCreateClientWithClientManagerRole() {
+        CreateClientRequest request = buildRequest();
+        CreateClientResponse response = sendRequest(CLIENT_MANAGER_LOGIN, CLIENT_MANAGER_PASSWORD, request);
         assertThat(response.isOk(), is(true));
         assertThat(response.getErrors(), is(nullValue()));
         assertThat(response.getClientId(), is(notNullValue()));
     }
 
     @Test
-    @DatabaseSetup(value = "classpath:dbunit/client/register_client/registerClient-Admin-setupDataset.xml")
-    @ExpectedDatabase(value = "classpath:dbunit/client/register_client/registerClient-Admin-expectedDataset.xml", assertionMode= NON_STRICT)
+    @DatabaseSetup(value = "classpath:dbunit/client/create_client/createClient-Admin-setupDataset.xml")
+    @ExpectedDatabase(value = "classpath:dbunit/client/create_client/createClient-Admin-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
-    public void shouldRegisterClientWithAdminRole() {
-        ClientRegistrationRequest request = buildRequest();
-        ClientRegistrationResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
+    public void shouldCreateClientWithAdminRole() {
+        CreateClientRequest request = buildRequest();
+        CreateClientResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(true));
         assertThat(response.getErrors(), is(nullValue()));
         assertThat(response.getClientId(), is(notNullValue()));
     }
 
     @Test
-    @DatabaseSetup(value = "classpath:dbunit/client/register_client/registerClient-Admin-setupDataset.xml")
-    @ExpectedDatabase(value = "classpath:dbunit/client/register_client/registerClient-Admin-setupDataset.xml", assertionMode= NON_STRICT)
+    @DatabaseSetup(value = "classpath:dbunit/client/create_client/createClient-Admin-setupDataset.xml")
+    @ExpectedDatabase(value = "classpath:dbunit/client/create_client/createClient-Admin-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnValidationErrorWhenFirstNameIsNull() {
-        ClientRegistrationRequest request = buildRequest();
+        CreateClientRequest request = buildRequest();
         request.setFirstName(null);
-        ClientRegistrationResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
+        CreateClientResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), Matchers.is(CmsErrorCategory.VALIDATION));
@@ -60,14 +60,14 @@ public class ClientRegistrationIntegrationTest extends RestIntegrationTest {
     }
 
     @Test
-    @DatabaseSetup(value = "classpath:dbunit/client/register_client/registerClient-Admin-setupDataset.xml")
-    @ExpectedDatabase(value = "classpath:dbunit/client/register_client/registerClient-Admin-setupDataset.xml", assertionMode= NON_STRICT)
+    @DatabaseSetup(value = "classpath:dbunit/client/create_client/createClient-Admin-setupDataset.xml")
+    @ExpectedDatabase(value = "classpath:dbunit/client/create_client/createClient-Admin-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnValidationErrorWhenNoPhoneOrEmailProvided() {
-        ClientRegistrationRequest request = buildRequest();
+        CreateClientRequest request = buildRequest();
         request.setPhoneNumber(null);
         request.setEmail(null);
-        ClientRegistrationResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
+        CreateClientResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), is(CmsErrorCategory.VALIDATION));
@@ -76,12 +76,12 @@ public class ClientRegistrationIntegrationTest extends RestIntegrationTest {
     }
 
     @Test
-    @DatabaseSetup(value = "classpath:dbunit/client/register_client/registerClient-illegalAccessRights-setupDataset.xml")
-    @ExpectedDatabase(value = "classpath:dbunit/client/register_client/registerClient-illegalAccessRights-setupDataset.xml", assertionMode= NON_STRICT)
+    @DatabaseSetup(value = "classpath:dbunit/client/create_client/createClient-illegalAccessRights-setupDataset.xml")
+    @ExpectedDatabase(value = "classpath:dbunit/client/create_client/createClient-illegalAccessRights-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnSecurityErrorWhenUserNotHaveAccessRights() {
-        ClientRegistrationRequest request = buildRequest();
-        ClientRegistrationResponse response = sendRequest(BILL_MANAGER_LOGIN, BILL_MANAGER_PASSWORD, request);
+        CreateClientRequest request = buildRequest();
+        CreateClientResponse response = sendRequest(BILL_MANAGER_LOGIN, BILL_MANAGER_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), is(CmsErrorCategory.WORKFLOW));
@@ -90,12 +90,12 @@ public class ClientRegistrationIntegrationTest extends RestIntegrationTest {
     }
 
     @Test
-    @DatabaseSetup(value = "classpath:dbunit/client/register_client/registerClient-ClientAlreadyExist-setupDataset.xml")
-    @ExpectedDatabase(value = "classpath:dbunit/client/register_client/registerClient-ClientAlreadyExist-setupDataset.xml", assertionMode= NON_STRICT)
+    @DatabaseSetup(value = "classpath:dbunit/client/create_client/createClient-ClientAlreadyExist-setupDataset.xml")
+    @ExpectedDatabase(value = "classpath:dbunit/client/create_client/createClient-ClientAlreadyExist-setupDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnValidationErrorWhenClientAlreadyExist() {
-        ClientRegistrationRequest request = buildRequest();
-        ClientRegistrationResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
+        CreateClientRequest request = buildRequest();
+        CreateClientResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), is(CmsErrorCategory.VALIDATION));
@@ -103,8 +103,8 @@ public class ClientRegistrationIntegrationTest extends RestIntegrationTest {
         assertThat(response.getErrors().get(0).getDescription(), is("Client with same [firstName, lastName, phoneNumber, email] already exist"));
     }
 
-    private ClientRegistrationRequest buildRequest() {
-        return ClientRegistrationRequest.builder()
+    private CreateClientRequest buildRequest() {
+        return CreateClientRequest.builder()
                                         .firstName("Vasja")
                                         .lastName("Pupkin")
                                         .phoneNumber("+371222")
@@ -117,11 +117,11 @@ public class ClientRegistrationIntegrationTest extends RestIntegrationTest {
                                         .build();
     }
 
-    private ClientRegistrationResponse sendRequest(String userName,
-                                                   String password,
-                                                   ClientRegistrationRequest request) {
+    private CreateClientResponse sendRequest(String userName,
+                                             String password,
+                                             CreateClientRequest request) {
         return getRestTemplate(userName, password).postForObject(
-                baseUrl() + "/client", request, ClientRegistrationResponse.class);
+                baseUrl() + "/client", request, CreateClientResponse.class);
     }
 
 }

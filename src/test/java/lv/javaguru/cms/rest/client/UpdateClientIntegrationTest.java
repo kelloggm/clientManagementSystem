@@ -42,7 +42,7 @@ public class UpdateClientIntegrationTest extends RestIntegrationTest {
     @DatabaseSetup(value = "classpath:dbunit/client/update_client/updateClient-Admin-setupDataset.xml")
     @ExpectedDatabase(value = "classpath:dbunit/client/update_client/updateClient-Admin-expectedDataset.xml", assertionMode= NON_STRICT)
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
-    public void shouldRegisterClientWithAdminRole() {
+    public void shouldCreateClientWithAdminRole() {
         UpdateClientRequest request = buildRequest();
         UpdateClientResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(true));

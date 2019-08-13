@@ -14,7 +14,7 @@ import lv.javaguru.cms.rest.BaseResponse;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ClientRegistrationResponse extends BaseResponse {
+public class CreateClientResponse extends BaseResponse {
 
     private Long clientId;
 
