@@ -47,7 +47,7 @@ public class SystemUserController {
     public LoginSystemUserResponse login(Principal principal) {
         LoginSystemUserRequest request = LoginSystemUserRequest.builder().build();
         request.setSystemUserLogin(principal.getName());
-        SystemUserDTO systemUser = loginSystemUserService.get(request);
+        SystemUserDTO systemUser = loginSystemUserService.login(request);
         return LoginSystemUserResponse.builder().systemUser(systemUser).build();
     }
 

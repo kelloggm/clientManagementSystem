@@ -1,9 +1,11 @@
 package lv.javaguru.cms.services.systemuser;
 
 import lv.javaguru.cms.model.entities.SystemUserEntity;
+import lv.javaguru.cms.model.entities.SystemUserRoleEntity;
 import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.model.entities.search.SystemUserSpecification;
 import lv.javaguru.cms.model.repositories.SystemUserRepository;
+import lv.javaguru.cms.model.repositories.SystemUserRoleRepository;
 import lv.javaguru.cms.rest.controllers.search.SearchCondition;
 import lv.javaguru.cms.rest.controllers.systemuser.model.SearchSystemUsersRequest;
 import lv.javaguru.cms.rest.controllers.systemuser.model.SearchSystemUsersResponse;
@@ -28,6 +30,7 @@ public class SearchSystemUsersService {
 
     @Autowired private SystemUserRightsChecker rightsChecker;
     @Autowired private SystemUserRepository repository;
+    @Autowired private SystemUserRoleRepository systemUserRoleRepository;
     @Autowired private SystemUserDtoConverter converter;
 
     public SearchSystemUsersResponse search(SearchSystemUsersRequest request) {
@@ -86,8 +89,20 @@ public class SearchSystemUsersService {
 
     private List<SystemUserDTO> convert(List<SystemUserEntity> systemUsers) {
         return systemUsers.stream()
-                      .map(systemUser -> converter.convert(systemUser))
+                      .map(this::convert)
                       .collect(Collectors.toList());
+    }
+
+    private SystemUserDTO convert(SystemUserEntity systemUser) {
+        SystemUserDTO systemUserDTO = converter.convert(systemUser);
+        systemUserDTO.setRoles(getSystemUserRoles(systemUser));
+        return systemUserDTO;
+    }
+
+    private List<SystemUserRole> getSystemUserRoles(SystemUserEntity systemUser) {
+        return systemUserRoleRepository.findAllBySystemUser(systemUser).stream()
+                .map(SystemUserRoleEntity::getSystemUserRole)
+                .collect(Collectors.toList());
     }
 
 }

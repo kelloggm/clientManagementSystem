@@ -14,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @Transactional
 public class UpdateSystemUserService {
@@ -30,7 +33,9 @@ public class UpdateSystemUserService {
         updateSystemUser(systemUser, request);
         deleteAllSystemUserRoles(systemUser);
         createSystemUserRoles(request, systemUser);
-        return systemUserDtoConverter.convert(systemUser);
+        SystemUserDTO systemUserDTO = systemUserDtoConverter.convert(systemUser);
+        systemUserDTO.setRoles(getSystemUserRoles(systemUser));
+        return systemUserDTO;
     }
 
     private void deleteAllSystemUserRoles(SystemUserEntity systemUser) {
@@ -58,6 +63,12 @@ public class UpdateSystemUserService {
                 .systemUserRole(role)
                 .build();
         systemUserRoleRepository.save(systemUserRole);
+    }
+
+    private List<SystemUserRole> getSystemUserRoles(SystemUserEntity systemUser) {
+        return systemUserRoleRepository.findAllBySystemUser(systemUser).stream()
+                .map(SystemUserRoleEntity::getSystemUserRole)
+                .collect(Collectors.toList());
     }
 
 }

@@ -23,7 +23,7 @@ public class LoginSystemUserService {
     @Autowired private SystemUserRoleRepository systemUserRoleRepository;
     @Autowired private SystemUserDtoConverter converter;
 
-    public SystemUserDTO get(LoginSystemUserRequest request) {
+    public SystemUserDTO login(LoginSystemUserRequest request) {
         SystemUserEntity systemUser = systemUserRepository.getByLogin(request.getSystemUserLogin());
         SystemUserDTO systemUserDTO = converter.convert(systemUser);
         systemUserDTO.setRoles(getSystemUserRoles(systemUser));
