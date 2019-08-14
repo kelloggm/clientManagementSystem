@@ -5,9 +5,12 @@ import lv.javaguru.cms.rest.controllers.systemuser.model.CreateSystemUserRequest
 import lv.javaguru.cms.rest.controllers.systemuser.model.CreateSystemUserResponse;
 import lv.javaguru.cms.rest.controllers.systemuser.model.GetSystemUserRequest;
 import lv.javaguru.cms.rest.controllers.systemuser.model.GetSystemUserResponse;
+import lv.javaguru.cms.rest.controllers.systemuser.model.LoginSystemUserRequest;
+import lv.javaguru.cms.rest.controllers.systemuser.model.LoginSystemUserResponse;
 import lv.javaguru.cms.rest.dto.SystemUserDTO;
 import lv.javaguru.cms.services.systemuser.CreateSystemUserService;
 import lv.javaguru.cms.services.systemuser.GetSystemUserService;
+import lv.javaguru.cms.services.systemuser.LoginSystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +24,17 @@ import java.security.Principal;
 @RestController
 public class SystemUserController {
 
-    @Autowired private CreateSystemUserService createSystemUserService;
+    @Autowired private LoginSystemUserService loginSystemUserService;
     @Autowired private GetSystemUserService getSystemUserService;
+    @Autowired private CreateSystemUserService createSystemUserService;
 
-    // login
+    @PostMapping(path = "/system_user/login", consumes = "application/json", produces = "application/json")
+    public LoginSystemUserResponse login(Principal principal) {
+        LoginSystemUserRequest request = LoginSystemUserRequest.builder().build();
+        request.setSystemUserLogin(principal.getName());
+        SystemUserDTO systemUser = loginSystemUserService.get(request);
+        return LoginSystemUserResponse.builder().systemUser(systemUser).build();
+    }
 
     @PostMapping(path = "/system_user", consumes = "application/json", produces = "application/json")
     public CreateSystemUserResponse create(@Valid @RequestBody CreateSystemUserRequest request, Principal principal) {
