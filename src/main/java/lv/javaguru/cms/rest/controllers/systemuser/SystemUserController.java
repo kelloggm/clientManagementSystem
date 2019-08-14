@@ -43,7 +43,7 @@ public class SystemUserController {
     @Autowired private DeleteSystemUserService deleteSystemUserService;
     @Autowired private SearchSystemUsersService searchSystemUsersService;
 
-    @PostMapping(path = "/system_user/login", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
     public LoginSystemUserResponse login(Principal principal) {
         LoginSystemUserRequest request = LoginSystemUserRequest.builder().build();
         request.setSystemUserLogin(principal.getName());
