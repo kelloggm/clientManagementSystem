@@ -46,8 +46,7 @@ public class UpdateCourseService {
     }
 
     private CourseEntity getCourse(UpdateCourseRequest request) {
-        return courseRepository.findById(request.getCourseId())
-                                .orElseThrow(() -> new IllegalArgumentException("courseId"));
+        return courseRepository.getById(request.getCourseId());
     }
 
 }

@@ -7,19 +7,24 @@ import lv.javaguru.cms.rest.controllers.systemuser.model.GetSystemUserRequest;
 import lv.javaguru.cms.rest.controllers.systemuser.model.GetSystemUserResponse;
 import lv.javaguru.cms.rest.controllers.systemuser.model.LoginSystemUserRequest;
 import lv.javaguru.cms.rest.controllers.systemuser.model.LoginSystemUserResponse;
+import lv.javaguru.cms.rest.controllers.systemuser.model.UpdateSystemUserRequest;
+import lv.javaguru.cms.rest.controllers.systemuser.model.UpdateSystemUserResponse;
 import lv.javaguru.cms.rest.dto.SystemUserDTO;
 import lv.javaguru.cms.services.systemuser.CreateSystemUserService;
 import lv.javaguru.cms.services.systemuser.GetSystemUserService;
 import lv.javaguru.cms.services.systemuser.LoginSystemUserService;
+import lv.javaguru.cms.services.systemuser.UpdateSystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Objects;
 
 @RestController
 public class SystemUserController {
@@ -27,6 +32,7 @@ public class SystemUserController {
     @Autowired private LoginSystemUserService loginSystemUserService;
     @Autowired private GetSystemUserService getSystemUserService;
     @Autowired private CreateSystemUserService createSystemUserService;
+    @Autowired private UpdateSystemUserService updateSystemUserService;
 
     @PostMapping(path = "/system_user/login", consumes = "application/json", produces = "application/json")
     public LoginSystemUserResponse login(Principal principal) {
@@ -51,7 +57,16 @@ public class SystemUserController {
         return GetSystemUserResponse.builder().systemUser(systemUser).build();
     }
 
-    // update
+    @PutMapping(path = "/system_user/{systemUserId}", consumes = "application/json", produces = "application/json")
+    public UpdateSystemUserResponse update(@PathVariable("systemUserId") Long systemUserId,
+                                           @Valid @RequestBody UpdateSystemUserRequest request, Principal principal) {
+        if (!Objects.equals(systemUserId, request.getSystemUserId())) {
+            throw new IllegalArgumentException("systemUserId");
+        }
+        request.setSystemUserLogin(principal.getName());
+        SystemUserDTO systemUser = updateSystemUserService.update(request);
+        return UpdateSystemUserResponse.builder().systemUser(systemUser).build();
+    }
 
     // delete - delete all user roles, but not delete user itself
 
