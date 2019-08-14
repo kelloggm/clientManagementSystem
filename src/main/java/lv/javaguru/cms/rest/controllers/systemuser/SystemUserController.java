@@ -9,6 +9,8 @@ import lv.javaguru.cms.rest.controllers.systemuser.model.GetSystemUserRequest;
 import lv.javaguru.cms.rest.controllers.systemuser.model.GetSystemUserResponse;
 import lv.javaguru.cms.rest.controllers.systemuser.model.LoginSystemUserRequest;
 import lv.javaguru.cms.rest.controllers.systemuser.model.LoginSystemUserResponse;
+import lv.javaguru.cms.rest.controllers.systemuser.model.SearchSystemUsersRequest;
+import lv.javaguru.cms.rest.controllers.systemuser.model.SearchSystemUsersResponse;
 import lv.javaguru.cms.rest.controllers.systemuser.model.UpdateSystemUserRequest;
 import lv.javaguru.cms.rest.controllers.systemuser.model.UpdateSystemUserResponse;
 import lv.javaguru.cms.rest.dto.SystemUserDTO;
@@ -16,6 +18,7 @@ import lv.javaguru.cms.services.systemuser.CreateSystemUserService;
 import lv.javaguru.cms.services.systemuser.DeleteSystemUserService;
 import lv.javaguru.cms.services.systemuser.GetSystemUserService;
 import lv.javaguru.cms.services.systemuser.LoginSystemUserService;
+import lv.javaguru.cms.services.systemuser.SearchSystemUsersService;
 import lv.javaguru.cms.services.systemuser.UpdateSystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +41,7 @@ public class SystemUserController {
     @Autowired private CreateSystemUserService createSystemUserService;
     @Autowired private UpdateSystemUserService updateSystemUserService;
     @Autowired private DeleteSystemUserService deleteSystemUserService;
+    @Autowired private SearchSystemUsersService searchSystemUsersService;
 
     @PostMapping(path = "/system_user/login", consumes = "application/json", produces = "application/json")
     public LoginSystemUserResponse login(Principal principal) {
@@ -81,6 +85,10 @@ public class SystemUserController {
         return DeleteSystemUserResponse.builder().build();
     }
 
-    // search
+    @PostMapping(path = "/system_user/search", consumes = "application/json", produces = "application/json")
+    public SearchSystemUsersResponse search(@Valid @RequestBody SearchSystemUsersRequest request, Principal principal) {
+        request.setSystemUserLogin(principal.getName());
+        return searchSystemUsersService.search(request);
+    }
 
 }
