@@ -41,4 +41,10 @@ public class SystemUserController {
         return GetSystemUserResponse.builder().systemUser(systemUser).build();
     }
 
+    // update
+
+    // delete - delete all user roles, but not delete user itself
+
+    // search
+
 }

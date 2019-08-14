@@ -9,7 +9,9 @@ import lombok.ToString;
 import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.rest.BaseRequest;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Builder
@@ -31,7 +33,7 @@ public class CreateSystemUserRequest extends BaseRequest {
     @NotNull
     private String password;
 
-    @NotNull
-    private SystemUserRole systemUserRole;
+    @NotEmpty
+    private List<SystemUserRole> systemUserRoles;
 
 }

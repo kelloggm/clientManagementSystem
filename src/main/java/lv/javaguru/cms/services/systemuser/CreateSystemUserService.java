@@ -24,7 +24,12 @@ public class CreateSystemUserService {
     public SystemUserEntity register(CreateSystemUserRequest request) {
         systemUserRightsChecker.checkAccessRights(request.getSystemUserLogin(), SystemUserRole.ADMIN);
         checkIfSystemUserWithSameLoginAlreadyExist(request);
+        SystemUserEntity systemUser = createSystemUser(request);
+        request.getSystemUserRoles().forEach(role -> createSystemUserRole(systemUser, role));
+        return systemUser;
+    }
 
+    private SystemUserEntity createSystemUser(CreateSystemUserRequest request) {
         SystemUserEntity systemUser = SystemUserEntity.builder()
                                                       .firstName(request.getFirstName())
                                                       .lastName(request.getLastName())
@@ -33,14 +38,15 @@ public class CreateSystemUserService {
                                                       .build();
         systemUser.setModifiedBy(request.getSystemUserLogin());
         systemUser = systemUserRepository.save(systemUser);
-
-        SystemUserRoleEntity systemUserRole = SystemUserRoleEntity.builder()
-                                                                  .systemUser(systemUser)
-                                                                  .systemUserRole(request.getSystemUserRole())
-                                                                  .build();
-        systemUserRoleRepository.save(systemUserRole);
-
         return systemUser;
+    }
+
+    private void createSystemUserRole(SystemUserEntity systemUser, SystemUserRole role) {
+        SystemUserRoleEntity systemUserRole = SystemUserRoleEntity.builder()
+                .systemUser(systemUser)
+                .systemUserRole(role)
+                .build();
+        systemUserRoleRepository.save(systemUserRole);
     }
 
     private void checkIfSystemUserWithSameLoginAlreadyExist(CreateSystemUserRequest request) {

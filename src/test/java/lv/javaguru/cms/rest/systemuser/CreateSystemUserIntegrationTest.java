@@ -9,6 +9,7 @@ import lv.javaguru.cms.rest.controllers.systemuser.model.CreateSystemUserRequest
 import lv.javaguru.cms.rest.controllers.systemuser.model.CreateSystemUserResponse;
 import lv.javaguru.cms.rest.util.RestIntegrationTest;
 import lv.javaguru.cms.model.entities.enums.SystemUserRole;
+import org.assertj.core.util.Lists;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
@@ -99,13 +100,13 @@ public class CreateSystemUserIntegrationTest extends RestIntegrationTest {
     @DatabaseTearDown(value = "classpath:dbunit/database-cleanup.xml", type = DELETE_ALL)
     public void shouldReturnValidationErrorWhenUserRoleIsNull() {
         CreateSystemUserRequest request = buildRequest();
-        request.setSystemUserRole(null);
+        request.setSystemUserRoles(null);
         CreateSystemUserResponse response = sendRequest(ADMIN_LOGIN, ADMIN_PASSWORD, request);
         assertThat(response.isOk(), is(false));
         assertThat(response.getErrors().size(), is(1));
         assertThat(response.getErrors().get(0).getCategory(), is(CmsErrorCategory.VALIDATION));
         assertThat(response.getErrors().get(0).getCode(), is(CmsErrorCode.MISSING_FIELD));
-        assertThat(response.getErrors().get(0).getDescription(), is("systemUserRole"));
+        assertThat(response.getErrors().get(0).getDescription(), is("systemUserRoles"));
     }
 
     @Test
@@ -143,7 +144,7 @@ public class CreateSystemUserIntegrationTest extends RestIntegrationTest {
                                         .lastName("Pupkin")
                                         .login("login")
                                         .password("password")
-                                        .systemUserRole(SystemUserRole.ADMIN)
+                                        .systemUserRoles(Lists.newArrayList(SystemUserRole.ADMIN))
                                         .build();
     }
 
