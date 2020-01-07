@@ -5,10 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 import lv.javaguru.cms.rest.BaseRequest;
-
-import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -18,28 +17,28 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 public class CreateCompanyRequest extends BaseRequest {
 
-    @NotNull
+    @NonNull
     private String title;
 
-    @NotNull
+    @NonNull
     private String registrationNumber;
 
-    @NotNull
+    @NonNull
     private String legalAddress;
 
-    @NotNull
+    @NonNull
     private String bankName;
 
-    @NotNull
+    @NonNull
     private String bankBicSwift;
 
-    @NotNull
+    @NonNull
     private String bankAccount;
 
-    @NotNull
+    @NonNull
     private String memberOfTheBoard;
 
-    @NotNull
+    @NonNull
     private Boolean pvnPayer;
 
 }

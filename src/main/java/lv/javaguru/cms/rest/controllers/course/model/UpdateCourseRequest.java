@@ -5,13 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 import lv.javaguru.cms.model.entities.enums.CourseType;
 import lv.javaguru.cms.model.entities.enums.DayOfTheWeek;
 import lv.javaguru.cms.model.entities.enums.Language;
 import lv.javaguru.cms.rest.BaseRequest;
 
-import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -21,37 +21,37 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 public class UpdateCourseRequest extends BaseRequest {
 
-    @NotNull
+    @NonNull
     private Long courseId;
 
-    @NotNull
+    @NonNull
     private String title;
 
-    @NotNull
+    @NonNull
     private Language language;
 
-    @NotNull
+    @NonNull
     private String startDate;
 
-    @NotNull
+    @NonNull
     private String endDate;
 
-    @NotNull
+    @NonNull
     private CourseType courseType;
 
-    @NotNull
+    @NonNull
     private String address;
 
-    @NotNull
+    @NonNull
     private String lessonsTimeFrom;
 
-    @NotNull
+    @NonNull
     private String lessonsTimeTo;
 
-    @NotNull
+    @NonNull
     private DayOfTheWeek dayOfTheWeek;
 
-    @NotNull
+    @NonNull
     private Integer fullPrice;
 
 }

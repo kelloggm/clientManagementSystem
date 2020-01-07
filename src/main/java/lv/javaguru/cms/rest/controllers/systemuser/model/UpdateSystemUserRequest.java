@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 import lv.javaguru.cms.model.entities.enums.SystemUserRole;
 import lv.javaguru.cms.rest.BaseRequest;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -21,19 +21,20 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class UpdateSystemUserRequest extends BaseRequest {
 
-    @NotNull
+    @NonNull
     private Long systemUserId;
 
-    @NotNull
+    @NonNull
     private String firstName;
 
-    @NotNull
+    @NonNull
     private String lastName;
 
-    @NotNull
+    @NonNull
     private String password;
 
     @NotEmpty
+    @NonNull
     private List<SystemUserRole> systemUserRoles;
 
 }

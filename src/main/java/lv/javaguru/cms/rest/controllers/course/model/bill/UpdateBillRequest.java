@@ -5,11 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 import lv.javaguru.cms.model.entities.enums.BillStatus;
 import lv.javaguru.cms.rest.BaseRequest;
-
-import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -19,10 +18,10 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 public class UpdateBillRequest extends BaseRequest {
 
-    @NotNull
+    @NonNull
     private Long billId;
 
-    @NotNull
+    @NonNull
     private BillStatus billStatus;
 
 }
