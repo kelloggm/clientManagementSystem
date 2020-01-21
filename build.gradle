@@ -28,19 +28,9 @@ repositories {
     jcenter()
 }
 
-if (project.hasProperty("cfLocal")) {
-    def cfHome = String.valueOf(System.getenv("CHECKERFRAMEWORK"))
-    dependencies {
-        compileOnly files(cfHome + "/checker/dist/checker-qual.jar")
-        testCompileOnly files(cfHome + "/checker/dist/checker-qual.jar")
-        checkerFramework files(cfHome + "/checker/dist/checker.jar")
-        checkerFrameworkAnnotatedJDK files(cfHome + "/checker/dist/jdk8.jar")
-    }
-}
-
 checkerFramework {
     checkers = ['org.checkerframework.checker.objectconstruction.ObjectConstructionChecker']
-    extraJavacArgs = ['-AsuppressWarnings=type.anno.before.decl.anno', '-Ashowchecks']
+    extraJavacArgs = ['-AsuppressWarnings=type.anno.before.decl.anno']
     skipVersionCheck = true
 }
 
@@ -66,8 +56,9 @@ dependencies {
     testImplementation 'org.dbunit:dbunit:2.6.0'
     testImplementation 'org.apache.httpcomponents:httpclient:4.5.3'
 
-    checkerFramework 'net.sridharan.objectconstruction:object-construction-checker:0.1.3'
-    implementation 'net.sridharan.objectconstruction:object-construction-qual:0.1.3'
+    checkerFramework 'net.sridharan.objectconstruction:object-construction-checker:0.1.7-SNAPSHOT'
+    checkerFramework 'org.checkerframework:checker:3.1.1-SNAPSHOT'
+    implementation 'net.sridharan.objectconstruction:object-construction-qual:0.1.7-SNAPSHOT'
 }   
 
 // Define the main class for the application
