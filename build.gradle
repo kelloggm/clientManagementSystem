@@ -30,9 +30,9 @@ repositories {
 }
 
 checkerFramework {
-    checkers = ['org.checkerframework.checker.objectconstruction.ObjectConstructionChecker']
-    extraJavacArgs = ['-AsuppressWarnings=type.anno.before.decl.anno']
     skipVersionCheck = true
+    checkers = ['org.checkerframework.checker.objectconstruction.ObjectConstructionChecker']
+    extraJavacArgs = ['-AsuppressWarnings=type.anno.before.decl.anno', '-Awarns']
 }
 
 if (project.hasProperty("cfShowChecks")) {
@@ -76,11 +76,6 @@ if (project.hasProperty("cfLocal")) {
     }
 }
 
-checkerFramework {
-    skipVersionCheck = true
-    checkers = ['org.checkerframework.checker.objectconstruction.ObjectConstructionChecker']
-    extraJavacArgs = ['-AsuppressWarnings=type.anno.before', '-Awarns']
-}
 dependencies {
     checkerFramework 'net.sridharan.objectconstruction:object-construction-checker:0.1.7-SNAPSHOT'
     implementation 'net.sridharan.objectconstruction:object-construction-qual:0.1.7-SNAPSHOT'
