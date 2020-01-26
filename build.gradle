@@ -13,7 +13,7 @@ plugins {
     // Apply the application plugin to add support for building an application
     id 'application'
 
-    //id 'com.gradle.build-scan' version '2.0.2'R
+    //id 'com.gradle.build-scan' version '2.0.2'
     id 'org.springframework.boot' version '2.0.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.7.RELEASE'
 
@@ -30,9 +30,9 @@ repositories {
 }
 
 checkerFramework {
-    skipVersionCheck = true
     checkers = ['org.checkerframework.checker.objectconstruction.ObjectConstructionChecker']
     extraJavacArgs = ['-AsuppressWarnings=type.anno.before.decl.anno', '-Awarns']
+    skipVersionCheck = true
 }
 
 if (project.hasProperty("cfShowChecks")) {
@@ -78,6 +78,7 @@ if (project.hasProperty("cfLocal")) {
 
 dependencies {
     checkerFramework 'net.sridharan.objectconstruction:object-construction-checker:0.1.7-SNAPSHOT'
+    checkerFramework 'org.checkerframework:checker:3.1.1-SNAPSHOT'
     implementation 'net.sridharan.objectconstruction:object-construction-qual:0.1.7-SNAPSHOT'
 }
 
