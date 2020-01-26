@@ -52,7 +52,7 @@ public class SystemUserController {
     }
 
     @PostMapping(path = "/system_user", consumes = "application/json", produces = "application/json")
-    public CreateSystemUserResponse create(@Valid @RequestBody CreateSystemUserRequest request, Principal principal) {
+    public CreateSystemUserResponse create(@RequestBody @Valid CreateSystemUserRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         SystemUserEntity systemUser = createSystemUserService.register(request);
         return CreateSystemUserResponse.builder().systemUserId(systemUser.getId()).build();
@@ -68,7 +68,7 @@ public class SystemUserController {
 
     @PutMapping(path = "/system_user/{systemUserId}", consumes = "application/json", produces = "application/json")
     public UpdateSystemUserResponse update(@PathVariable("systemUserId") Long systemUserId,
-                                           @Valid @RequestBody UpdateSystemUserRequest request, Principal principal) {
+                                           @RequestBody @Valid UpdateSystemUserRequest request, Principal principal) {
         if (!Objects.equals(systemUserId, request.getSystemUserId())) {
             throw new IllegalArgumentException("systemUserId");
         }
@@ -86,7 +86,7 @@ public class SystemUserController {
     }
 
     @PostMapping(path = "/system_user/search", consumes = "application/json", produces = "application/json")
-    public SearchSystemUsersResponse search(@Valid @RequestBody SearchSystemUsersRequest request, Principal principal) {
+    public SearchSystemUsersResponse search(@RequestBody @Valid SearchSystemUsersRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         return searchSystemUsersService.search(request);
     }
