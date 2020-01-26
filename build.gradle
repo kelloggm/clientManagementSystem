@@ -31,7 +31,7 @@ repositories {
 
 checkerFramework {
     checkers = ['org.checkerframework.checker.objectconstruction.ObjectConstructionChecker']
-    extraJavacArgs = ['-AsuppressWarnings=type.anno.before.decl.anno']
+    extraJavacArgs = ['-AsuppressWarnings=type.anno.before.decl.anno', '-Awarns']
     skipVersionCheck = true
 }
 
@@ -56,11 +56,25 @@ dependencies {
     testImplementation 'com.github.springtestdbunit:spring-test-dbunit:1.3.0'
     testImplementation 'org.dbunit:dbunit:2.6.0'
     testImplementation 'org.apache.httpcomponents:httpclient:4.5.3'
+}
 
+// checker framework
+// To use a locally-built Checker Framework, run gradle with "-PcfLocal".
+if (project.hasProperty("cfLocal")) {
+    def cfHome = String.valueOf(System.getenv("CHECKERFRAMEWORK"))
+    dependencies {
+        compileOnly files(cfHome + "/checker/dist/checker-qual.jar")
+        testCompileOnly files(cfHome + "/checker/dist/checker-qual.jar")
+        checkerFramework files(cfHome + "/checker/dist/checker.jar")
+        checkerFrameworkAnnotatedJDK files(cfHome + "/checker/dist/jdk8.jar")
+    }
+}
+
+dependencies {
     checkerFramework 'net.sridharan.objectconstruction:object-construction-checker:0.1.7-SNAPSHOT'
     checkerFramework 'org.checkerframework:checker:3.1.1-SNAPSHOT'
     implementation 'net.sridharan.objectconstruction:object-construction-qual:0.1.7-SNAPSHOT'
-}   
+}
 
 // Define the main class for the application
 mainClassName = 'lv.javaguru.cmc.App'

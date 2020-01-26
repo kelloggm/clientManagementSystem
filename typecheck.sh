@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
-./gradlew clean compileJava -PcfLocal
+./gradlew compileJava -PcfLocal
