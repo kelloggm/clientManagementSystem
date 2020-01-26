@@ -35,7 +35,7 @@ public class CourseParticipantController {
 
     @PostMapping(path = "/course/{courseId}/participant", produces = "application/json")
     public CreateCourseParticipantResponse createParticipant(@PathVariable("courseId") Long courseId,
-                                                             @Valid @RequestBody CreateCourseParticipantRequest request,
+                                                             @RequestBody @Valid CreateCourseParticipantRequest request,
                                                              Principal principal) {
         if (!Objects.equals(courseId, request.getCourseId())) {
             throw new IllegalArgumentException("courseId");

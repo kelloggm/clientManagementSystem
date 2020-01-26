@@ -34,7 +34,7 @@ public class CompanyController {
     @Autowired private SearchCompaniesService searchCompaniesService;
 
     @PostMapping(path = "/company", consumes = "application/json", produces = "application/json")
-    public CreateCompanyResponse register(@Valid @RequestBody CreateCompanyRequest request, Principal principal) {
+    public CreateCompanyResponse register(@RequestBody @Valid CreateCompanyRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         CompanyDTO companyDTO = createCompanyService.create(request);
         return CreateCompanyResponse.builder().companyId(companyDTO.getId()).build();
@@ -50,7 +50,7 @@ public class CompanyController {
 
     @PutMapping(path = "/company/{companyId}", consumes = "application/json", produces = "application/json")
     public UpdateCompanyResponse update(@PathVariable("companyId") Long companyId,
-                                        @Valid @RequestBody UpdateCompanyRequest request,
+                                        @RequestBody @Valid UpdateCompanyRequest request,
                                         Principal principal) {
         if (!Objects.equals(companyId, request.getCompanyId())) {
             throw new IllegalArgumentException("companyId");
@@ -61,7 +61,7 @@ public class CompanyController {
     }
 
     @PostMapping(path = "/company/search", consumes = "application/json", produces = "application/json")
-    public SearchCompaniesResponse search(@Valid @RequestBody SearchCompaniesRequest request, Principal principal) {
+    public SearchCompaniesResponse search(@RequestBody @Valid SearchCompaniesRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         return searchCompaniesService.search(request);
     }

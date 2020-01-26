@@ -46,7 +46,7 @@ public class CourseController {
     @Autowired private CreateCourseBillsService createCourseBillsService;
 
     @PostMapping(path = "/course", consumes = "application/json", produces = "application/json")
-    public CreateCourseResponse register(@Valid @RequestBody CreateCourseRequest request, Principal principal) {
+    public CreateCourseResponse register(@RequestBody @Valid CreateCourseRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         CourseDTO course = createCourseService.create(request);
         return CreateCourseResponse.builder().courseId(course.getId()).build();
@@ -62,7 +62,7 @@ public class CourseController {
 
     @PutMapping(path = "/course/{courseId}", consumes = "application/json", produces = "application/json")
     public UpdateCourseResponse update(@PathVariable("courseId") Long courseId,
-                                       @Valid @RequestBody UpdateCourseRequest request,
+                                       @RequestBody @Valid UpdateCourseRequest request,
                                        Principal principal) {
         if (!Objects.equals(courseId, request.getCourseId())) {
             throw new IllegalArgumentException("courseId");
@@ -73,7 +73,7 @@ public class CourseController {
     }
 
     @PostMapping(path = "/course/search", consumes = "application/json", produces = "application/json")
-    public SearchCoursesResponse search(@Valid @RequestBody SearchCoursesRequest request, Principal principal) {
+    public SearchCoursesResponse search(@RequestBody @Valid SearchCoursesRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         return searchCoursesService.search(request);
     }
@@ -95,7 +95,7 @@ public class CourseController {
     }
 
     @PostMapping(path = "/course/{courseId}/bills", consumes = "application/json", produces = "application/json")
-    public CreateCourseBillsResponse createBills(@Valid @RequestBody CreateCourseBillsRequest request,
+    public CreateCourseBillsResponse createBills(@RequestBody @Valid CreateCourseBillsRequest request,
                                                 Principal principal) {
         request.setSystemUserLogin(principal.getName());
         return createCourseBillsService.create(request);

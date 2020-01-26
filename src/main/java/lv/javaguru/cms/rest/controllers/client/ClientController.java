@@ -42,7 +42,7 @@ public class ClientController {
     @Autowired private SearchClientsService searchClientsService;
 
     @PostMapping(path = "/client", consumes = "application/json", produces = "application/json")
-    public CreateClientResponse register(@Valid @RequestBody CreateClientRequest request, Principal principal) {
+    public CreateClientResponse register(@RequestBody @Valid CreateClientRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         ClientDTO client = createClientService.register(request);
         return CreateClientResponse.builder().clientId(client.getId()).build();
@@ -72,7 +72,7 @@ public class ClientController {
 
     @PutMapping(path = "/client/{clientId}", consumes = "application/json", produces = "application/json")
     public UpdateClientResponse update(@PathVariable("clientId") Long clientId,
-                                       @Valid @RequestBody UpdateClientRequest request,
+                                       @RequestBody @Valid UpdateClientRequest request,
                                        Principal principal) {
         if (!Objects.equals(clientId, request.getClientId())) {
             throw new IllegalArgumentException("clientId");
@@ -83,7 +83,7 @@ public class ClientController {
     }
 
     @PostMapping(path = "/client/search", consumes = "application/json", produces = "application/json")
-    public SearchClientsResponse search(@Valid @RequestBody SearchClientsRequest request, Principal principal) {
+    public SearchClientsResponse search(@RequestBody @Valid SearchClientsRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         return searchClientsService.search(request);
     }

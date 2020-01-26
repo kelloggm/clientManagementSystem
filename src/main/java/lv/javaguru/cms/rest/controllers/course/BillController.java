@@ -39,7 +39,7 @@ public class BillController {
     @Autowired private SearchBillsService searchBillsService;
 
     @PostMapping(path = "/bill", consumes = "application/json", produces = "application/json")
-    public CreateBillResponse createBill(@Valid @RequestBody CreateBillRequest request,
+    public CreateBillResponse createBill(@RequestBody @Valid CreateBillRequest request,
                                          Principal principal) {
         request.setSystemUserLogin(principal.getName());
         BillDTO bill = createBillService.create(request);
@@ -56,7 +56,7 @@ public class BillController {
 
     @PutMapping(path = "/bill/{billId}", consumes = "application/json", produces = "application/json")
     public UpdateBillResponse update(@PathVariable("billId") Long billId,
-                                     @Valid @RequestBody UpdateBillRequest request,
+                                     @RequestBody @Valid UpdateBillRequest request,
                                      Principal principal) {
         if (!Objects.equals(billId, request.getBillId())) {
             throw new IllegalArgumentException("billId");
@@ -68,7 +68,7 @@ public class BillController {
 
     @DeleteMapping(path = "/bill/{billId}", consumes = "application/json", produces = "application/json")
     public DeleteBillResponse delete(@PathVariable("billId") Long billId,
-                                     @Valid @RequestBody DeleteBillRequest request,
+                                     @RequestBody @Valid DeleteBillRequest request,
                                      Principal principal) {
         if (!Objects.equals(billId, request.getBillId())) {
             throw new IllegalArgumentException("billId");
@@ -79,7 +79,7 @@ public class BillController {
     }
 
     @PostMapping(path = "/bill/search", consumes = "application/json", produces = "application/json")
-    public SearchBillsResponse search(@Valid @RequestBody SearchBillsRequest request, Principal principal) {
+    public SearchBillsResponse search(@RequestBody @Valid SearchBillsRequest request, Principal principal) {
         request.setSystemUserLogin(principal.getName());
         return searchBillsService.search(request);
     }
